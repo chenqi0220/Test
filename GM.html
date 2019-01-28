@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en"> <!--定义文字格式-->
+<head>
+    <meta charset="UTF-8">
+    <title>测试后台地址</title>
+    <!--<link rel="shortcut icon"type="image/x-icon" href="./icon.png"media="screen" />-->
+    <link rel="icon" href="icon.png"  /><!--这个地方的图片应该是用的相对路径-->
+<style>
+
+
+    .item1 {
+      margin: 0 auto;
+      color: green;
+      text-align: center;
+    }
+
+    .item2 {
+      margin: 0px auto;
+      
+	}
+    .item2 input {
+      padding:0;
+      margin-top: 100px;
+      margin-left: 10px;
+      border: 1px solid green;
+      width: 120px;
+      height: 50px;
+      position: relative;
+      margin-top: 30px;
+      text-align: center;
+      font-size:12px;
+      font-weight:bold;
+      border-radius:5px;
+      list-style:none;
+      /* 等比缩放特效时间 */
+      -webkit-transition: all 0.5s; -moz-transition: all 0.5s; -o-transition: all 0.5s;
+    }
+    .mybtn:hover {       
+                          background: #f47c20;
+                          -webkit-transform: scale(1.3); /*1.1放大值*/
+                          -moz-transform: scale(1.3); 
+                          -o-transform: scale(1.3);
+                          -ms-transform: scale(1.3); 
+                          /*  本hover用的是：transform属性；scale是属性下放大；*/
+
+                          /* 旋转特效 */
+                         /*transform:rotate(360deg);
+                         -webkit-transform:rotate(360deg);
+                         -moz-transform:rotate(360deg);
+                         -o-transform:rotate(360deg);    /*css3旋转属性； 360deg（顺时针旋转360度）*/
+                         /* -ms-transform:rotate(360deg);*/ 
+                         }
+    #times{
+                /* padding: 0px; */
+                margin-left: 1550px;
+                margin-top: 185px;
+                font-size: 18px;
+                width: 300px;
+                height: 25px;
+                border: 3px solid rgb(88, 65, 65);  /*如果不加实线无法显示边框*/
+                display: flex;
+                justify-content: center;
+            }
+</style>
+</head>  
+</head>
+<body background="" style="background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;padding:0;margin:0;position:relative"><!--暂时屏蔽掉BG图-->
+    <script type="text/javascript">
+      //得到时间并写入div
+      function getDate(){
+      //获取当前时间
+      var date = new Date();
+      //格式化为本地时间格式
+      var date1 = date.toLocaleString();
+      //获取div
+      var div1 = document.getElementById("times");
+      //将时间写入div
+      div1.innerHTML = "系统时间："+ date1;
+      }
+      //使用定时器每秒向div写入当前时间
+      setInterval("getDate()",1000);
+      function diag()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          //若输入为空或空格，直接返回false
+          if(id == null || id == "")
+          {
+            return false;
+          }
+          var VIP=parseInt("20");
+          var vip=prompt("请输入Vip等级：",VIP);
+          vip = Number(vip);
+          if(typeof vip != 'number'|| isNaN(vip))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (vip == null || vip == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/UPDATE_PLAYERINFO?"
+          var url = baseurl + "id="+id+"&vip="+vip
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag1()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if(id == null || id == "")
+          {
+            return false;
+          }
+          var VIP=parseInt("20");
+          var vip=prompt("请输入Vip等级：",VIP);
+          vip = Number(vip);
+          if(typeof vip != 'number'|| isNaN(vip))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (vip == null || vip == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/UPDATE_PLAYERINFO?"
+          var url = baseurl + "id="+id+"&vip="+vip
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag2()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          //将string转换成number，parseInt()方法
+          var Gold=parseInt("20");
+          var gold=prompt("请输入玩家ID：",Gold);
+          gold = Number(gold);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof gold != 'number'|| isNaN(gold))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (gold == null || gold == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/CHANGE_GOLD?"
+          var url = baseurl + "playerId="+id+"&changegold="+gold
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag3()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          //将string转换成number，parseInt()方法
+          var Gold=parseInt("20");
+          var gold=prompt("请输入玩家ID：",Gold);
+          gold = Number(gold);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof gold != 'number'|| isNaN(gold))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (gold == null || gold == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/CHANGE_GOLD?"
+          var url = baseurl + "playerId="+id+"&changegold="+gold
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入钻石数量：","yzuan,200000,999,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag5()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入钻石数量：","yzuan,200000,999,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag6()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag7()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag8()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+        //   var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward=cannon,1,3001,-1;cannon,1,3011,-1;cannon,1,3012,-1;cannon,1,3013,-1;cannon,1,3014,-1;cannon,1,3015,-1;cannon,1,3016,-1;cannon,1,3017,-1;cannon,1,3018,-1;cannon,1,3019,-1;cannon,1,3020,-1;;cannon,1,3021,-1;cannon,1,3022,-1;cannon,1,3023,-1;cannon,1,3024,-1;cannon,1,3025,-1;cannon,1,3027,-1;cannon,1,3061,-1;cannon,1,3062,-1;cannon,1,3063,-1;cannon,1,3064,-1"
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag9()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+        //   var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward=cannon,1,3001,-1;cannon,1,3011,-1;cannon,1,3012,-1;cannon,1,3013,-1;cannon,1,3014,-1;cannon,1,3015,-1;cannon,1,3016,-1;cannon,1,3017,-1;cannon,1,3018,-1;cannon,1,3019,-1;cannon,1,3020,-1;;cannon,1,3021,-1;cannon,1,3022,-1;cannon,1,3023,-1;cannon,1,3024,-1;cannon,1,3025,-1;cannon,1,3027,-1;cannon,1,3061,-1;cannon,1,3062,-1;cannon,1,3063,-1;cannon,1,3064,-1"
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_召唤数量：","addUp,999,1064,-1;addUp,999,1072,-1;");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY1()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_召唤数量：","addUp,999,1064,-1;addUp,999,1072,-1;");
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY2()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_狂暴数量：","addUp,999,1065,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY3()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_狂暴数量：","addUp,999,1065,-1");
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_核弹数量：","addUp,999,1066,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY5()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_核弹数量：","addUp,999,1066,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY6()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_冰冻数量：","addUp,999,1067,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY7()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_冰冻数量：","addUp,999,1067,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY8()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_锁定数量：","addUp,999,1068,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY9()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_锁定数量：","addUp,999,1068,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY10()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_青铜弹头数量：","addUp,999,6251,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY11()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_青铜弹头数量：","addUp,999,6251,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY12()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_白银弹头数量：","addUp,999,6252,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY13()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_白银弹头数量：","addUp,999,6252,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY14()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_能量数量：","addUp,999,1042,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY15()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_能量数量：","addUp,999,1042,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_小福袋数量：","addUp,999,1043,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT1()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_小福袋数量：","addUp,999,1043,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT2()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_小福袋数量：","addUp,999,1043,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT3()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_银福袋数量：","addUp,999,1044,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_金福袋数量：","addUp,999,1045,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT5()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_金福袋数量：","addUp,999,1045,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT6()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var chargeType=prompt("请输入充值类型(0-普通(限时),1-限次)：","0");
+          if (chargeType == null || chargeType == "")
+          {
+            return false;
+          }
+          var money = prompt("请输入商品价格：","98");
+          if (money == null || money == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/TEST_BUY_CHARGE_GOLD_AWARD?"
+          var url = baseurl + "pid="+id+ "&chargeType="+chargeType+ "&money="+money
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT7()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var chargeType=prompt("请输入充值类型(0-普通(限时),1-限次)：","0");
+          if (chargeType == null || chargeType == "")
+          {
+            return false;
+          }
+          var money = prompt("请输入商品价格：","98");
+          if (money == null || money == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/TEST_BUY_CHARGE_GOLD_AWARD?"
+          var url = baseurl + "pid="+id+ "&giftBagId="+giftBagId+ "&type="+type
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT8()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var giftBagId=prompt("请输入ID：","998");
+          if (giftBagId == null || giftBagId == "")
+          {
+            return false;
+          }
+          var price = prompt("请输入价格：","25")
+          if (price == null || price == "")
+          {
+            return false;
+          }
+          var type = prompt("请输入充值类型(1-白金月卡(废弃),2-普通月卡)：","2")
+          if (type == null || type == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/TEST_BUY_CHARGE_GIFTBAG_AWARD?"
+          var url = baseurl + "pid="+id+ "&giftBagId="+giftBagId+ "&price="+price+ "&type="+type
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT9()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var giftBagId=prompt("请输入ID：","998");
+          if (giftBagId == null || giftBagId == "")
+          {
+            return false;
+          }
+          var price = prompt("请输入价格：","25")
+          if (price == null || price == "")
+          {
+            return false;
+          }
+          var type = prompt("请输入充值类型(1-白金月卡(废弃),2-普通月卡)：","2")
+          if (type == null || type == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/TEST_BUY_CHARGE_GIFTBAG_AWARD?"
+          var url = baseurl + "pid="+id+ "&giftBagId="+giftBagId+ "&price="+price+ "&type="+type
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT10()
+      {
+          //将string转换成number，parseInt()方法
+          var Params=parseInt("20");
+          var params=prompt("请输入玩家ID：",Params);
+          params = Number(params);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof params != 'number'|| isNaN(params))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (params == null || params == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/groovycode?code=GetBox.txt"
+          var url = baseurl + "&params="+params
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT11()
+      {
+         //将string转换成number，parseInt()方法
+         var Params=parseInt("20");
+          var params=prompt("请输入玩家ID：",Params);
+          params = Number(params);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof params != 'number'|| isNaN(params))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (params == null || params == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/groovycode?code=GetBox.txt"
+          var url = baseurl + "&params="+params
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT12()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (playerId == null || playerId == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/GUIDE/BUY_COMMODITY?"
+          var url = baseurl + "playerId="+playerId+"&comId=1047&money=45"
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT13()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (playerId == null || playerId == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/GUIDE/BUY_COMMODITY?"
+          var url = baseurl + "playerId="+playerId+"&comId=1047&money=45"
+          // window.location.href=url
+          window.open(url)
+      }
+      function DDZ()
+      {
+          var open=prompt("true-开启,false-关闭：","");
+          if (open == null || open == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/DDZ_SHIELD_IP?"
+          var url = baseurl + "open="+open
+        // window.location.href=url
+          window.open(url)
+      }
+      function DDZ1()
+      {
+          var open=prompt("true-开启,false-关闭：","");
+          if (open == null || open == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9000/DDZ_SHIELD_IP?"
+          var url = baseurl + "open="+open
+        // window.location.href=url
+          window.open(url)
+      }
+      function jj()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (palyerId == null || palyerId == "")
+          {
+            return false;
+          }
+          var goodPool=prompt("请输入水浒传个人彩金池数量：","10000000");
+          if (goodPool == null || goodPool == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9020/ADD_SHZ_GOLDPOOL?"
+          var url = baseurl + "palyerId="+palyerId+"&goodPool="+goodPool
+        // window.location.href=url
+          window.open(url)
+      }
+      function jj1()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (palyerId == null || palyerId == "")
+          {
+            return false;
+          }
+          var goodPool=prompt("请输入水浒传个人彩金池数量：","10000000");
+          if (goodPool == null || goodPool == "")
+          {
+            return false;
+          }
+          var baseurl = "http://116.62.71.118:9020/ADD_SHZ_GOLDPOOL?"
+          var url = baseurl + "palyerId="+palyerId+"&goodPool="+goodPool
+        // window.location.href=url
+          window.open(url)
+      }
+      </script>
+
+<div class="item1">
+<img src="icon.png" >
+</div>
+<div class="title">
+  <div class="item1">
+	<div>
+    <h1>GM后台</h1>
+	</div>
+  </div>
+  </div>
+  <div class="item2">
+  <input  class="mybtn" type="button" value="测试服后台" style="margin-top:20px;margin-left:83px" onclick="window.open('http://47.96.174.106:8080/dfhmanage/index.jsp')"
+  <div>
+      <input class="mybtn" type="button" value="预发布后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('http://116.62.71.118:8080/dfhmanage/jsp/main.jsp')"
+  </div>
+  <input class="mybtn" type="button" value="正式服后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('https://mmgg.yuwan-game.com/')"
+  <div>
+      <input class="mybtn" type="button" value="打包管理后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('http://bpm.yuwan-game.com/#/login')"
+  </div> 
+  <input class="mybtn" type="button" value="审核服后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('http://hk.fishbox-game.com:8080/dfhmanage/index.jsp')" 
+  <div>
+      <input class="mybtn" type="button" value="预发布账号生成" style="margin-top:-70px;margin-left:50px" onclick="window.open('https://prerelease.guoneitest.com/p_acc/t_page/register.html')"
+  </div>
+  <input class="mybtn" type="button" value="测试服账号生成" style="margin-top:-70px;margin-left:50px" onclick="window.open('https://guoneitest.com:8092/t_page/register.html')"
+  <div>
+      <input class="mybtn" type="button" value="Wps文档后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('https://drive.wps.cn/team/280280335')"
+  </div>
+  <input class="mybtn" type="button" value="confluence后台" style="margin-top:40px;margin-left:50px" onclick="window.open('http://192.168.1.128:8090/pages/viewpage.action?pageId=3085762')"
+  <div>
+    <input class="mybtn" type="button" value="禅道后台" style="margin-top:40px;margin-left:50px" onclick="window.open('http://server/zentao/my/')">
+  </div>
+  
+</div>
+  <div class="item2">
+    <input  class="mybtn" type="button" value="Vip等级(Master)" name="Su1" style="margin-top:40px;margin-left:83px" onclick="diag()">
+    <input  class="mybtn" type="button" value="Vip等级(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag1()">
+    <input  class="mybtn" type="button" value="增加金币(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag2()">
+    <input  class="mybtn" type="button" value="增加金币(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag3()">
+    <input  class="mybtn" type="button" value="增加钻石(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag4()">
+    <input  class="mybtn" type="button" value="增加钻石(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag5()">
+    <input  class="mybtn" type="button" value="增加奖券(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag6()">
+    <input  class="mybtn" type="button" value="增加奖券(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag7()">
+    <input  class="mybtn" type="button" value="所有炮台(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag8()">
+    <input  class="mybtn" type="button" value="所有炮台(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag9()">
+  </div>
+  <div class="item2">
+      <input class="mybtn" type="button" value="BY_召唤(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY()">
+      <input class="mybtn" type="button" value="BY_召唤(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY1()">
+      <input class="mybtn" type="button" value="BY_狂暴(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY2()">
+      <input class="mybtn" type="button" value="BY_狂暴(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY3()">
+      <input class="mybtn" type="button" value="BY_核弹(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY4()">
+      <input class="mybtn" type="button" value="BY_核弹(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY5()">
+      <input class="mybtn" type="button" value="BY_冰冻(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY6()">
+      <input class="mybtn" type="button" value="BY_冰冻(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY7()">
+      <input class="mybtn" type="button" value="BY_锁定(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY8()">
+      <input class="mybtn" type="button" value="BY_锁定(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY9()">
+      <input class="mybtn" type="button" value="BY_青铜弹头(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY10()">
+      <input class="mybtn" type="button" value="BY_青铜弹头(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY11()">
+      <input class="mybtn" type="button" value="BY_白银弹头(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY12()">
+      <input class="mybtn" type="button" value="BY_白银弹头(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY13()">
+      <input class="mybtn" type="button" value="BY_能量(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY14()">
+      <input class="mybtn" type="button" value="BY_能量(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY15()">
+      <input class="mybtn" type="button" value="DT_小福袋(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT()">
+      <input class="mybtn" type="button" value="DT_小福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT1()">
+      <input class="mybtn" type="button" value="DT_银福袋(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT2()">
+      <input class="mybtn" type="button" value="DT_银福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT3()">
+      <input class="mybtn" type="button" value="DT_金福袋(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DT4()">
+      <input class="mybtn" type="button" value="DT_金福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT5()">
+      <input class="mybtn" type="button" value="DT_购买商品(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT6()">
+      <input class="mybtn" type="button" value="DT_购买商品(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT7()">
+      <input class="mybtn" type="button" value="DT_购买月卡(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT8()">
+      <input class="mybtn" type="button" value="DT_购买月卡(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT9()">
+      <input class="mybtn" type="button" value="DT_夺宝奇兵(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT10()">
+      <input class="mybtn" type="button" value="DT_夺宝奇兵(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT11()">
+      <input class="mybtn" type="button" value="DT_新春指南(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT12()">
+      <input class="mybtn" type="button" value="DT_新春指南(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT13()">
+      <input class="mybtn" type="button" value="斗地主IP开关(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DDZ()">
+      <input class="mybtn" type="button" value="斗地主IP开关(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DDZ1()">
+      <input class="mybtn" type="button" value="水浒传pool(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="jj()">
+      <input class="mybtn" type="button" value="水浒传pool(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="jj1()">
+</div>    
+<div id="times"></div>
+</body>
+</html>
