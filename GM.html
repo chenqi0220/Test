@@ -66,19 +66,19 @@
 </head>
 <body background="" style="background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;padding:0;margin:0;position:relative"><!--暂时屏蔽掉BG图-->
     <script type="text/javascript">
-      //得到时间并写入div
-      function getDate(){
-      //获取当前时间
-      var date = new Date();
-      //格式化为本地时间格式
-      var date1 = date.toLocaleString();
-      //获取div
-      var div1 = document.getElementById("times");
-      //将时间写入div
-      div1.innerHTML = "系统时间："+ date1;
-      }
-      //使用定时器每秒向div写入当前时间
-      setInterval("getDate()",1000);
+          //得到时间并写入div
+          function getDate(){
+          //获取当前时间
+          var date = new Date();
+          //格式化为本地时间格式
+          var date1 = date.toLocaleString();
+          //获取div
+          var div1 = document.getElementById("times");
+          //将时间写入div
+          div1.innerHTML = "系统时间："+ date1;
+          }
+          //使用定时器每秒向div写入当前时间
+          setInterval("getDate()",1000);
       function diag()
       {
           //将string转换成number，parseInt()方法
