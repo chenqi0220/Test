@@ -6,8 +6,6 @@
     <!--<link rel="shortcut icon"type="image/x-icon" href="./icon.png"media="screen" />-->
     <link rel="icon" href="icon.png"  /><!--这个地方的图片应该是用的相对路径-->
 <style>
-
-
     .item1 {
       margin: 0 auto;
       color: green;
@@ -16,17 +14,12 @@
 
     .item2 {
       margin: 0px auto;
-      
 	}
     .item2 input {
-      padding:0;
-      margin-top: 100px;
-      margin-left: 10px;
       border: 1px solid green;
       width: 120px;
       height: 50px;
       position: relative;
-      margin-top: 30px;
       text-align: center;
       font-size:12px;
       font-weight:bold;
@@ -53,19 +46,44 @@
     #times{
                 /* padding: 0px; */
                 margin-left: 1550px;
-                margin-top: 185px;
+                margin-top: 225px;
                 font-size: 18px;
                 width: 300px;
-                height: 25px;
+                height: 30px;
                 border: 3px solid rgb(88, 65, 65);  /*如果不加实线无法显示边框*/
                 display: flex;
                 justify-content: center;
             }
+     /* TODO:搜索功能年后完善*/
+
+     /* .g-container{
+              
+                padding: 0px auto;
+                margin-left: 1625px;
+             } 
+          
+     .basic-grey {
+                width:200px;
+                margin:5% 10%;
+            }  
+            
+     .basic-grey .Companies ul {
+                position:relative; 
+                height:200px;
+                width:100%;
+                display:none; 
+             }   */
 </style>
 </head>  
 </head>
 <body background="" style="background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;padding:0;margin:0;position:relative"><!--暂时屏蔽掉BG图-->
-    <script type="text/javascript">
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+        //获取btn字符串
+        // function btnval(){
+        //   var buttonValue=document.getElementById('button').value;
+        //   console.log("Value:::::" + buttonValue);
+        // }
           //得到时间并写入div
           function getDate(){
           //获取当前时间
@@ -1229,6 +1247,7 @@
           var url = baseurl + "palyerId="+palyerId+"&goodPool="+goodPool
         // window.location.href=url
           window.open(url)
+          
       }
       </script>
 
@@ -1237,13 +1256,27 @@
 </div>
 <div class="title">
   <div class="item1">
-	<div>
-    <h1>GM后台</h1>
-	</div>
+	<div style="font-size: 35px;font-weight: bold">GM后台</div>
   </div>
   </div>
+  <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+<!-- TODO 搜索功能年后完善 -->
+
+<!-- <div class="g-container" style="margin-top:-80px"> 
+    <form action="" class="basic-grey">
+        <div class="form-group">
+            <label for="lastname" class="control-label">
+            快速搜索:
+            </label>
+            <div class="Companies">
+                <input class="form-control" type="text" placeholder="输入关键字，确认后回车">
+                <input type="button" value="搜索" id = "input" onclick="btnval()">
+            </div>
+        </div>
+    </form>
+</div> -->
   <div class="item2">
-  <input  class="mybtn" type="button" value="测试服后台" style="margin-top:20px;margin-left:83px" onclick="window.open('http://47.96.174.106:8080/dfhmanage/index.jsp')"
+  <input  class="mybtn" type="button" value="测试服后台"  style="margin-top:20px;margin-left:83px" onclick="window.open('http://47.96.174.106:8080/dfhmanage/index.jsp')"
   <div>
       <input class="mybtn" type="button" value="预发布后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('http://116.62.71.118:8080/dfhmanage/jsp/main.jsp')"
   </div>
@@ -1266,7 +1299,7 @@
   
 </div>
   <div class="item2">
-    <input  class="mybtn" type="button" value="Vip等级(Master)" name="Su1" style="margin-top:40px;margin-left:83px" onclick="diag()">
+    <input  class="mybtn" type="button" id="button" value="Vip等级(Master)" name="Su1" style="margin-top:40px;margin-left:83px" onclick="diag()">
     <input  class="mybtn" type="button" value="Vip等级(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag1()">
     <input  class="mybtn" type="button" value="增加金币(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag2()">
     <input  class="mybtn" type="button" value="增加金币(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag3()">
@@ -1314,5 +1347,6 @@
       <input class="mybtn" type="button" value="水浒传pool(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="jj1()">
 </div>    
 <div id="times"></div>
+
 </body>
 </html>
