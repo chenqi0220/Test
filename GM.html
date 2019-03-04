@@ -114,7 +114,7 @@
           {
             return false;
           }
-          var VIP=parseInt("20");
+          var VIP=parseInt("2");
           var vip=prompt("请输入Vip等级：",VIP);
           vip = Number(vip);
           if(typeof vip != 'number'|| isNaN(vip))
@@ -147,7 +147,7 @@
           {
             return false;
           }
-          var VIP=parseInt("20");
+          var VIP=parseInt("2");
           var vip=prompt("请输入Vip等级：",VIP);
           vip = Number(vip);
           if(typeof vip != 'number'|| isNaN(vip))
@@ -160,6 +160,39 @@
             return false;
           }
           var baseurl = "http://116.62.71.118:9000/UPDATE_PLAYERINFO?"
+          var url = baseurl + "id="+id+"&vip="+vip
+        // window.location.href=url
+          window.open(url)
+      }
+      function hw4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if(id == null || id == "")
+          {
+            return false;
+          }
+          var VIP=parseInt("2");
+          var vip=prompt("请输入Vip等级：",VIP);
+          vip = Number(vip);
+          if(typeof vip != 'number'|| isNaN(vip))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (vip == null || vip == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.99.191:9000/UPDATE_PLAYERINFO?"
           var url = baseurl + "id="+id+"&vip="+vip
         // window.location.href=url
           window.open(url)
@@ -1409,21 +1442,18 @@
   
 </div>
   <div class="item2">
-    <input  class="mybtn" type="button" id="button" value="Vip等级(Master)" name="Su1" style="margin-top:40px;margin-left:83px" onclick="diag()">
-    <input  class="mybtn" type="button" value="Vip等级(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag1()">
-    <input  class="mybtn" type="button" value="增加金币(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag2()">
-    <input  class="mybtn" type="button" value="增加金币(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag3()">
-    <input  class="mybtn" type="button" value="增加金币(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw()">
-    <input  class="mybtn" type="button" value="增加钻石(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag4()">
-    <input  class="mybtn" type="button" value="增加钻石(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag5()">
-    <input  class="mybtn" type="button" value="增加钻石(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw1()">
-    <input  class="mybtn" type="button" value="增加奖券(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag6()">
-    <input  class="mybtn" type="button" value="增加奖券(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag7()">
-    
-    
-  </div>
-  <div class="item2">
-      <input  class="mybtn" type="button" value="增加奖券(海外test)" name="Su1" style="margin-top:40px;margin-left:83px"onclick="hw2()">
+      <input  class="mybtn" type="button" id="button" value="Vip等级(Master)" name="Su1" style="margin-top:40px;margin-left:83px" onclick="diag()">
+      <input  class="mybtn" type="button" value="Vip等级(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag1()">
+      <input  class="mybtn" type="button" value="Vip等级(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw4()">
+      <input  class="mybtn" type="button" value="增加金币(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag2()">
+      <input  class="mybtn" type="button" value="增加金币(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag3()">
+      <input  class="mybtn" type="button" value="增加金币(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw()">
+      <input  class="mybtn" type="button" value="增加钻石(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag4()">
+      <input  class="mybtn" type="button" value="增加钻石(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag5()">
+      <input  class="mybtn" type="button" value="增加钻石(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw1()">
+      <input  class="mybtn" type="button" value="增加奖券(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag6()">
+      <input  class="mybtn" type="button" value="增加奖券(预发布)" name="Su1" style="margin-top:40px;margin-left:83px"onclick="diag7()">
+      <input  class="mybtn" type="button" value="增加奖券(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw2()">
       <input  class="mybtn" type="button" value="所有炮台(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag8()">
       <input  class="mybtn" type="button" value="所有炮台(预发布)" name="Su1" style="margin-top:40px;margin-left:50px"onclick="diag9()">
       <input  class="mybtn" type="button" value="所有炮台(海外test)" name="Su1" style="margin-top:40px;margin-left:50px"onclick="hw3()">
@@ -1432,8 +1462,8 @@
       <input class="mybtn" type="button" value="BY_狂暴(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY2()">
       <input class="mybtn" type="button" value="BY_狂暴(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY3()">
       <input class="mybtn" type="button" value="BY_核弹(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY4()">
-      <input class="mybtn" type="button" value="BY_核弹(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY5()">
-      <input class="mybtn" type="button" value="BY_冰冻(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY6()">
+      <input class="mybtn" type="button" value="BY_核弹(预发布)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY5()">
+      <input class="mybtn" type="button" value="BY_冰冻(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY6()">
       <input class="mybtn" type="button" value="BY_冰冻(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY7()">
       <input class="mybtn" type="button" value="BY_锁定(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY8()">
       <input class="mybtn" type="button" value="BY_锁定(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY9()">
@@ -1442,8 +1472,8 @@
       <input class="mybtn" type="button" value="BY_白银弹头(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY12()">
       <input class="mybtn" type="button" value="BY_白银弹头(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY13()">
       <input class="mybtn" type="button" value="BY_能量(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY14()">
-      <input class="mybtn" type="button" value="BY_能量(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY15()">
-      <input class="mybtn" type="button" value="DT_小福袋(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DT()">
+      <input class="mybtn" type="button" value="BY_能量(预发布)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY15()">
+      <input class="mybtn" type="button" value="DT_小福袋(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT()">
       <input class="mybtn" type="button" value="DT_小福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT1()">
       <input class="mybtn" type="button" value="DT_银福袋(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT2()">
       <input class="mybtn" type="button" value="DT_银福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT3()">
@@ -1452,8 +1482,8 @@
       <input class="mybtn" type="button" value="DT_购买商品(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT6()">
       <input class="mybtn" type="button" value="DT_购买商品(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT7()">
       <input class="mybtn" type="button" value="DT_购买月卡(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT8()">
-      <input class="mybtn" type="button" value="DT_购买月卡(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT9()">
-      <input class="mybtn" type="button" value="DT_夺宝奇兵(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DT10()">
+      <input class="mybtn" type="button" value="DT_购买月卡(预发布)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DT9()">
+      <input class="mybtn" type="button" value="DT_夺宝奇兵(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT10()">
       <input class="mybtn" type="button" value="DT_夺宝奇兵(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT11()">
       <input class="mybtn" type="button" value="DT_新春指南(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT12()">
       <input class="mybtn" type="button" value="DT_新春指南(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT13()">
