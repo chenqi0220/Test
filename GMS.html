@@ -1,0 +1,6070 @@
+<!--
+###############################################################
+#           GM.html(鱼丸游戏GM后台)                             #
+# create time:2019-2-26 11:38:21                               #
+# by:chenqi                                                    #
+# 该网页属于静态网页，未有与服务器交互                            #
+# ToDo:后续需要开发快捷搜索功能，将btn赋值一个id                  #
+# pre:116.62.71.118(新服)                                      #
+# pre:118.31.73.124(老服)                                      #
+# 这个是GM竖屏版本的适配code                                    #
+###############################################################
+-->
+<!DOCTYPE html>
+<html lang="en"> <!--定义文字格式-->
+<head>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GM后台</title>
+    <!--<link rel="shortcut icon"type="image/x-icon" href="./icon.png"media="screen" />-->
+    <link rel="icon" href="icon.png"  /><!--这个地方的图片应该是用的相对路径-->
+<style>
+    .item1 {
+      margin: 0 auto;
+      color: green;
+      text-align: center;
+    }
+
+    .item2 {
+      margin: 0px auto;
+      width:auto;
+      height:auto;
+	}
+    .item2 input {
+      border: 1px solid green;
+      width: 120px;
+      height: 50px;
+      position: relative;
+      text-align: center;
+      font-size:12px;
+      font-weight:bold;
+      border-radius:5px;
+      list-style:none;
+      /* 等比缩放特效时间 */
+      -webkit-transition: all 0.5s; -moz-transition: all 0.5s; -o-transition: all 0.5s;
+    }
+    .mybtn:hover {       
+                           margin:0 auto;
+						   background: #f47c20;
+						   color：white;
+						   opacity:0.2;
+                          -webkit-transform: scale(1.3); /*1.1放大值*/
+                          -moz-transform: scale(1.3); 
+                          -o-transform: scale(1.3);
+                          -ms-transform: scale(1.3); 
+                          /*  本hover用的是：transform属性；scale是属性下放大；*/
+
+                          /* 旋转特效 */
+                         /*transform:rotate(360deg);
+                         -webkit-transform:rotate(360deg);
+                         -moz-transform:rotate(360deg);
+                         -o-transform:rotate(360deg);    /*css3旋转属性； 360deg（顺时针旋转360度）*/
+                         /* -ms-transform:rotate(360deg);*/ 
+                         }
+    #times{
+                /* padding: 0px; */
+                margin-left: 710px;
+                margin-top: 5px;
+                font-size: 18px;
+                width:290px;
+                height:30px;
+                border: 3px solid rgb(88, 65, 65);  /*如果不加实线无法显示边框*/
+                display: flex;
+                justify-content: center;
+				color：white;
+				opacity:0.6;
+            }
+     /* TODO:搜索功能年后完善*/
+
+      .g-container{
+              
+                padding: 0px auto;
+                margin-left: 1625px;
+             } 
+          
+     .basic-grey {
+                width:200px;
+                margin:5% 10%;
+            }  
+            
+     .basic-grey .Companies ul {
+                position:relative; 
+                height:200px;
+                width:100%;
+                display:none; 
+             } 
+	 #test{
+		margin-left:710px;
+		margin-top: 300px;
+		width:290px;
+		height:150px;
+		border: 3px solid rgb(88, 65, 65);
+		color：white;
+		opacity:0.6;
+		text-align:center;
+		font-size:18px;
+        font-weight:bold;
+		}				 
+		/*BG图css样式*/
+        video{  
+            position: fixed;              
+            height:auto;  
+            width: auto;
+			background-size: cover;
+			min-height:100%;
+            /*加滤镜*/
+			/* filter: blur(0px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/  
+            /*filter:grayscale(100%); //背景灰度设置*/  
+            z-index:-100;
+        }
+		@media screen and (orientation: portrait) {   
+		/*竖屏 css*/  
+		
+		}
+</style>
+</head>  
+<body background="" style="background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;padding:0;margin:0;position:relative"><!--暂时屏蔽掉BG图-->
+<video autoplay loop muted>
+	<source src="bg.mp4" type="video/mp4">
+</video>
+<script type="text/javascript">
+        // // 获取btn字符串
+        // function btnval(){
+        //   var button_Value=document.getElementById('button').value;
+        //   console.log("Value:::::" + button_Value);
+        // }
+           /* 鼠标特效 */ 
+        var a_idx = 0; 
+            b_idx = 0;
+            c_idx = 0;  
+        jQuery(document).ready(function($) { 
+                $("body").click(function(e) { 
+        var a = new Array("成蹊科技~", "庆祝祖国成立70周年快乐！", "文明", "傻der~", "自由", "平等", "叫爸爸~" ,"法治", "吓老子一跳", "敬业", "诚信", "友善"); 
+            b = new Array("#09ebfc", "#ff6651", "#ffb351", "#51ff65", "#5197ff", "#a551ff", "#ff51f7", "#ff518e", "#ff5163", "#efff51");
+            c = new Array("12", "14", "16", "18", "20", "22", "24", "26", "28", "30");
+        var $i = $("<span/>").text(a[a_idx]); 
+                 a_idx = (a_idx + 1) % a.length; 
+                 b_idx = (b_idx + 1) % b.length;
+                 c_idx = (c_idx + 1) % c.length;
+        var x = e.pageX, 
+        y = e.pageY; 
+                console.log("x::::::::::::::::" + x);
+                console.log("y::::::::::::::::" + y);
+        $i.css({
+                  "z-index": 999,
+                  "top": y - 20,
+                  "left": x,
+                  "position": "absolute",
+                  "font-weight": "bold",
+                  "font-size": c[c_idx] + "px",
+                  "color": b[b_idx]
+              });
+        $("body").append($i); 
+        $i.animate({
+                  "top": y - 180,
+                  "opacity": 0
+              }, 1500, function() {
+                  $i.remove();
+              });
+                  }); 
+                      }); 
+  
+          //得到时间并写入div
+          function getDate(){
+          //获取当前时间
+          var date = new Date();
+          //格式化为本地时间格式
+          var date1 = date.toLocaleString();
+          //获取div
+          var div1 = document.getElementById("times");
+          //将时间写入div
+          div1.innerHTML = "系统时间："+ date1;
+          }
+          //使用定时器每秒向div写入当前时间
+          setInterval("getDate()",1000);
+	 //pre 切换新服/老服逻辑
+    function diag0()
+	  {
+	  //prompt里面的输入数字不能从0开始，必须从1开始
+	  var ID=parseInt("1");
+	  var id=prompt("1:20.2版本pre后台 || 2:21.0版本pre后台:",ID);
+	  id = Number(id);
+	  if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+		  //若输入为空或空格，直接返回false
+          if(id == null || id == "")
+          {
+            return false;
+          }
+		  var url = "http://118.31.73.124/dfhmanage/jsp/main.jsp"
+		  var Url = "https://prerelease.guoneitest.com/dfhmanage/index.jsp"
+		  if(id == 1)
+		  {
+		  window.open(Url);
+		  //console.log("id:::::::"+id);
+		  }
+		  else
+		  {
+		  //console.log("id::::::"+id);
+		  window.open(url);
+		  }
+		  }
+	//H5测试服/正式服切换逻辑  
+	function H5()
+	  {
+	  //prompt里面的输入数字不能从0开始，必须从1开始
+	  var ID=parseInt("1");
+	  var id=prompt("1:H5测试服后台 || 2:H5正式服后台:",ID);
+	  id = Number(id);
+	  if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+		  //若输入为空或空格，直接返回false
+          if(id == null || id == "")
+          {
+            return false;
+          }
+		  var url = "http://h5-game.jiechanggame.cn/dfhmanage/index.jsp"
+		  var Url = "http://118.31.34.177/dfhmanage/jsp/main.jsp"
+		  if(id == 1)
+		  {
+		  window.open(Url);
+		  //console.log("id:::::::"+id);
+		  }
+		  else
+		  {
+		  //console.log("id::::::"+id);
+		  window.open(url);
+		  }
+		  }
+      function diag()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          //若输入为空或空格，直接返回false
+          if(id == null || id == "")
+          {
+            return false;
+          }
+          var VIP=parseInt("2");
+          var vip=prompt("请输入Vip等级：",VIP);
+          vip = Number(vip);
+          if(typeof vip != 'number'|| isNaN(vip))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (vip == null || vip == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/UPDATE_PLAYERINFO?"
+          var url = baseurl + "id="+id+"&vip="+vip
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag1()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if(id == null || id == "")
+          {
+            return false;
+          }
+          var VIP=parseInt("2");
+          var vip=prompt("请输入Vip等级：",VIP);
+          vip = Number(vip);
+          if(typeof vip != 'number'|| isNaN(vip))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (vip == null || vip == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/UPDATE_PLAYERINFO?"
+          var url = baseurl + "id="+id+"&vip="+vip
+        // window.location.href=url
+          window.open(url)
+      }
+      function hw4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if(id == null || id == "")
+          {
+            return false;
+          }
+          var VIP=parseInt("2");
+          var vip=prompt("请输入Vip等级：",VIP);
+          vip = Number(vip);
+          if(typeof vip != 'number'|| isNaN(vip))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (vip == null || vip == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.99.191:9000/UPDATE_PLAYERINFO?"
+          var url = baseurl + "id="+id+"&vip="+vip
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag2()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          //将string转换成number，parseInt()方法
+          var Gold=parseInt("1000000000");
+          var gold=prompt("请输入金币数量(数字前面加上“-”即为减金币)：",Gold);
+          gold = Number(gold);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof gold != 'number'|| isNaN(gold))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (gold == null || gold == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/CHANGE_GOLD?"
+          var url = baseurl + "playerId="+id+"&changegold="+gold
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag3()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          //将string转换成number，parseInt()方法
+          var Gold=parseInt("1000000000");
+          var gold=prompt("请输入金币数量(数字前面加上“-”即为减金币)：",Gold);
+          gold = Number(gold);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof gold != 'number'|| isNaN(gold))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (gold == null || gold == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/CHANGE_GOLD?"
+          var url = baseurl + "playerId="+id+"&changegold="+gold
+        // window.location.href=url
+          window.open(url)
+      }
+      function hw()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          //将string转换成number，parseInt()方法
+          var Gold=parseInt("1000000000");
+          var gold=prompt("请输入金币数量(数字前面加上“-”即为减金币)：",Gold);
+          gold = Number(gold);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof gold != 'number'|| isNaN(gold))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (gold == null || gold == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.99.191:9000/CHANGE_GOLD?"
+          var url = baseurl + "playerId="+id+"&changegold="+gold
+        // window.location.href=url
+          window.open(url)
+      }
+
+      function diag4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入钻石数量：","yzuan,200000,999,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag5()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入钻石数量：","yzuan,200000,999,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function hw1()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入钻石数量：","yzuan,200000,999,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.99.191:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag6()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag7()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function hw2()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.99.191:9000//ONE_MAIL?content=test&title=test&"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag8()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+        //   var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward=cannon,1,3001,-1;cannon,1,3011,-1;cannon,1,3012,-1;cannon,1,3013,-1;cannon,1,3014,-1;cannon,1,3015,-1;cannon,1,3016,-1;cannon,1,3017,-1;cannon,1,3018,-1;cannon,1,3019,-1;cannon,1,3020,-1;;cannon,1,3021,-1;cannon,1,3022,-1;cannon,1,3023,-1;cannon,1,3024,-1;cannon,1,3025,-1;cannon,1,3027,-1;cannon,1,3028,-1;cannon,1,3029,-1;cannon,1,3031,-1;cannon,1,3032,-1;cannon,1,3033,-1;cannon,1,3034,-1;cannon,1,3035,-1;cannon,1,3061,-1;cannon,1,3062,-1;cannon,1,3063,-1;cannon,1,3064,-1"
+        // window.location.href=url
+          window.open(url)
+      }
+      function diag9()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+        //   var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward=cannon,1,3001,-1;cannon,1,3011,-1;cannon,1,3012,-1;cannon,1,3013,-1;cannon,1,3014,-1;cannon,1,3015,-1;cannon,1,3016,-1;cannon,1,3017,-1;cannon,1,3018,-1;cannon,1,3019,-1;cannon,1,3020,-1;;cannon,1,3021,-1;cannon,1,3022,-1;cannon,1,3023,-1;cannon,1,3024,-1;cannon,1,3025,-1;cannon,1,3027,-1;cannon,1,3028,-1;cannon,1,3029,-1;cannon,1,3031,-1;cannon,1,3032,-1;cannon,1,3033,-1;cannon,1,3034,-1;cannon,1,3035,-1;cannon,1,3061,-1;cannon,1,3062,-1;cannon,1,3063,-1;cannon,1,3064,-1"
+        // window.location.href=url
+          window.open(url)
+      }
+      function hw3()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+        //   var reward=prompt("请输入奖券数量：","chips,200000,1002,-1");
+          var baseurl = "http://47.96.99.191:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward=cannon,1,3001,-1;cannon,1,3011,-1;cannon,1,3012,-1;cannon,1,3013,-1;cannon,1,3014,-1;cannon,1,3015,-1;cannon,1,3016,-1;cannon,1,3017,-1;cannon,1,3018,-1;cannon,1,3019,-1;cannon,1,3020,-1;;cannon,1,3021,-1;cannon,1,3022,-1;cannon,1,3023,-1;cannon,1,3024,-1;cannon,1,3025,-1;cannon,1,3027,-1;cannon,1,3028,-1;cannon,1,3029,-1;cannon,1,3031,-1;cannon,1,3032,-1;cannon,1,3033,-1;cannon,1,3034,-1;cannon,1,3035,-1;cannon,1,3061,-1;cannon,1,3062,-1;cannon,1,3063,-1;cannon,1,3064,-1"
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_召唤数量：","addUp,999,1064,-1;addUp,999,1072,-1;");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY1()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_召唤数量：","addUp,999,1064,-1;addUp,999,1072,-1;");
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY2()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_狂暴数量：","addUp,999,1065,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY3()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_狂暴数量：","addUp,999,1065,-1");
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_核弹数量：","addUp,999,1066,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY5()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_核弹数量：","addUp,999,1066,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY6()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_冰冻数量：","addUp,999,1067,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY7()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_冰冻数量：","addUp,999,1067,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY8()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_锁定数量：","addUp,999,1068,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY9()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_锁定数量：","addUp,999,1068,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY10()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_青铜弹头数量：","addUp,999,6251,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY11()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_青铜弹头数量：","addUp,999,6251,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY12()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_白银弹头数量：","addUp,999,6252,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY13()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_白银弹头数量：","addUp,999,6252,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY14()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_翅膀(满级)：","addUp,1,7900,-1,LV4;addUp,1,7901,-1,LV4;addUp,1,7902,-1,LV4;addUp,1,7903,-1,LV4;");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function BY15()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入BY_翅膀(满级)：","addUp,1,7900,-1,LV4;addUp,1,7901,-1,LV4;addUp,1,7902,-1,LV4;addUp,1,7903,-1,LV4;");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_小福袋数量：","addUp,999,1043,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT1()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_小福袋数量：","addUp,999,1043,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT2()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_小福袋数量：","addUp,999,1043,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT3()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_银福袋数量：","addUp,999,1044,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT4()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_金福袋数量：","addUp,999,1045,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT5()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var reward=prompt("请输入DT_金福袋数量：","addUp,999,1045,-1");
+          if (reward == null || reward == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/ADD_REWARD?"
+          var url = baseurl + "id="+id+"&reward="+reward
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT6()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var chargeType=prompt("请输入充值类型(0-普通(限时),1-限次)：","0");
+          if (chargeType == null || chargeType == "")
+          {
+            return false;
+          }
+          var money = prompt("请输入商品价格：","98");
+          if (money == null || money == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/TEST_BUY_CHARGE_GOLD_AWARD?"
+          var url = baseurl + "pid="+id+ "&chargeType="+chargeType+ "&money="+money
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT7()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var chargeType=prompt("请输入充值类型(0-普通(限时),1-限次)：","0");
+          if (chargeType == null || chargeType == "")
+          {
+            return false;
+          }
+          var money = prompt("请输入商品价格：","98");
+          if (money == null || money == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/TEST_BUY_CHARGE_GOLD_AWARD?"
+          var url = baseurl + "pid="+id+ "&chargeType="+chargeType+ "&money="+money
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT8()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var giftBagId=prompt("请输入ID：","998");
+          if (giftBagId == null || giftBagId == "")
+          {
+            return false;
+          }
+          var price = prompt("请输入价格：","25")
+          if (price == null || price == "")
+          {
+            return false;
+          }
+          var type = prompt("请输入充值类型(1-白金月卡(废弃),2-普通月卡)：","2")
+          if (type == null || type == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/TEST_BUY_CHARGE_GIFTBAG_AWARD?"
+          var url = baseurl + "pid="+id+ "&giftBagId="+giftBagId+ "&price="+price+ "&type="+type
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT9()
+      {
+          //将string转换成number，parseInt()方法
+          var ID=parseInt("20");
+          var id=prompt("请输入玩家ID：",ID);
+          id = Number(id);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof id != 'number'|| isNaN(id))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (id == null || id == "")
+          {
+            return false;
+          }
+          var giftBagId=prompt("请输入ID：","998");
+          if (giftBagId == null || giftBagId == "")
+          {
+            return false;
+          }
+          var price = prompt("请输入价格：","25")
+          if (price == null || price == "")
+          {
+            return false;
+          }
+          var type = prompt("请输入充值类型(1-白金月卡(废弃),2-普通月卡)：","2")
+          if (type == null || type == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/TEST_BUY_CHARGE_GIFTBAG_AWARD?"
+          var url = baseurl + "pid="+id+ "&giftBagId="+giftBagId+ "&price="+price+ "&type="+type
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT10()
+      {
+          //将string转换成number，parseInt()方法
+          var Params=parseInt("20");
+          var params=prompt("请输入玩家ID：",Params);
+          params = Number(params);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof params != 'number'|| isNaN(params))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (params == null || params == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/groovycode?code=GetBox.txt"
+          var url = baseurl + "&params="+params
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT11()
+      {
+         //将string转换成number，parseInt()方法
+         var Params=parseInt("20");
+          var params=prompt("请输入玩家ID：",Params);
+          params = Number(params);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof params != 'number'|| isNaN(params))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (params == null || params == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/groovycode?code=GetBox.txt"
+          var url = baseurl + "&params="+params
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT12()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (playerId == null || playerId == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/GUIDE/BUY_COMMODITY?"
+          var url = baseurl + "playerId="+playerId+"&comId=1047&money=45"
+        // window.location.href=url
+          window.open(url)
+      }
+      function DT13()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (playerId == null || playerId == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/GUIDE/BUY_COMMODITY?"
+          var url = baseurl + "playerId="+playerId+"&comId=1047&money=45"
+          // window.location.href=url
+          window.open(url)
+      }
+      function DDZ()
+      {
+          var open=prompt("true-开启,false-关闭：","");
+          if (open == null || open == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/DDZ_SHIELD_IP?"
+          var url = baseurl + "open="+open
+        // window.location.href=url
+          window.open(url)
+      }
+      function DDZ1()
+      {
+          var open=prompt("true-开启,false-关闭：","");
+          if (open == null || open == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9000/DDZ_SHIELD_IP?"
+          var url = baseurl + "open="+open
+        // window.location.href=url
+          window.open(url)
+      }
+      function jj()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (playerId == null || playerId == "")
+          {
+            return false;
+          }
+          var goodPool=prompt("请输入水浒传个人彩金池数量：","10000000");
+          if (goodPool == null || goodPool == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9020/ADD_SHZ_GOLDPOOL?"
+          var url = baseurl + "palyerId="+playerId+"&goodPool="+goodPool
+        // window.location.href=url
+          window.open(url)
+      }
+      function jj1()
+      {
+          //将string转换成number，parseInt()方法
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (playerId == null || playerId == "")
+          {
+            return false;
+          }
+          var goodPool=prompt("请输入水浒传个人彩金池数量：","10000000");
+          if (goodPool == null || goodPool == "")
+          {
+            return false;
+          }
+          var baseurl = "http://118.31.73.124:9020/ADD_SHZ_GOLDPOOL?"
+          var url = baseurl + "palyerId="+playerId+"&goodPool="+goodPool
+        // window.location.href=url
+          window.open(url)
+          
+      }
+	  function item()
+      {
+          //将string转换成number，parseInt()方法
+		  var start = prompt("请选择下发服务器(1:测试服/2:pre老服/3:pre新服)：")
+		  start = Number(start);
+		  if(typeof start != 'number'|| isNaN(start))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (start == null || start == "")
+          {
+            return false;
+          }
+          var PlayerId=parseInt("20");
+          var playerId=prompt("请输入玩家ID：",PlayerId);
+          playerId = Number(playerId);
+          // console.log("id::::::" + typeof(id) )
+          if(typeof playerId != 'number'|| isNaN(playerId))
+          {
+            alert("只支持数字，不能输入除Number类型以外的嗷~~~~~")
+            return false;
+          }
+          if (playerId == null || playerId == "")
+          {
+            return false;
+          }
+          var itemid=prompt("请输入道具id：");
+          if (itemid == null || itemid == "")
+          {
+            return false;
+          }
+		  var num=prompt("请输入道具数量(limit:999)：");
+          if (num == null || num == "")
+          {
+            return false;
+          }
+          var baseurl = "http://47.96.174.106:9000/ADD_REWARD?"
+		  var URL = "http://118.31.73.124:9000/ADD_REWARD?"
+		  var URL1 = "http://118.31.73.124:9000/ADD_REWARD?"
+		  if (start == 1){
+          var url = baseurl + "id="+playerId+"&reward=addUp,"+num+","+itemid+","+"-1"
+			window.open(url);
+			}
+		else if (start == 2){
+		var url = URL + "id="+playerId+"&reward=addUp,"+num+","+itemid+","+"-1"
+			window.open(url);
+		}
+		else{
+		var url = URL1 + "id="+playerId+"&reward=addUp,"+num+","+itemid+","+"-1"
+			window.open(url);
+		}
+      }
+      function showjson(){
+		var id = prompt("请输入所查询的道具的名称或道具的id:","支持模糊查询~")
+		if (id == "" || id == null)
+		{
+		return false;
+		}
+		var data = {
+	"997": {
+    "cnName": "铂金月卡", 
+    "enName": "paycardMonth", 
+    "id": "997", 
+    "type": 1, 
+    "value": "paycardMonth,#,997,-1"
+  }, 	
+	"998": {
+    "cnName": "普通月卡", 
+    "enName": "paycardMonth", 
+    "id": "998", 
+    "type": 1, 
+    "value": "paycardMonth,#,998,-1"
+  }, 
+	"999": {
+    "cnName": "钻石", 
+    "enName": "yzuan", 
+    "id": "999", 
+    "type": 1, 
+    "value": "yzuan,#,999,-1"
+  }, 
+	"1000": {
+    "cnName": "金币", 
+    "enName": "gold", 
+    "id": "1000", 
+    "type": 1, 
+    "value": "gold,#,1000,-1"
+  }, 
+	"1001": {
+    "cnName": "喇叭", 
+    "enName": "trumpet", 
+    "id": "1001", 
+    "type": 1, 
+    "value": "trumpet,#,1001,-1"
+  }, 
+    "1002": {
+    "id": "1002",
+    "enName": "chips",
+    "cnName": "奖券",
+    "value": "chips,#,1002,-1",
+    "type": "1"
+  },
+  "1004": {
+    "id": "1004",
+    "enName": "rgold",
+    "cnName": "随机金币",
+    "value": "rgold,#,*,1004",
+    "type": "3"
+  },
+  "1007": {
+    "id": "1007",
+    "enName": "supperRate",
+    "cnName": "超级加倍",
+    "value": "supperRate,#,1007,-1",
+    "type": "1"
+  },
+  "1008": {
+    "id": "1008",
+    "enName": "cardRecord",
+    "cnName": "记牌器（计数）",
+    "value": "cardRecord,#,1008,-1",
+    "type": "1"
+  },
+  "1009": {
+    "id": "1009",
+    "enName": "cardRecord",
+    "cnName": "记牌器（计时）",
+    "value": "cardRecord,1,1009,#",
+    "type": "0"
+  },
+  "1011": {
+    "id": "1011",
+    "enName": "ddzRgold",
+    "cnName": "斗地主随机金币",
+    "value": "rgold,#,1011,*",
+    "type": "4"
+  },
+  "1025": {
+    "id": "1025",
+    "enName": "skillFree",
+    "cnName": "初级号角",
+    "value": "skillFree,#,1025,-1",
+    "type": "1"
+  },
+  "1026": {
+    "id": "1026",
+    "enName": "skillFree",
+    "cnName": "中级号角",
+    "value": "skillFree,#,1026,-1",
+    "type": "1"
+  },
+  "1027": {
+    "id": "1027",
+    "enName": "skillFree",
+    "cnName": "高级号角",
+    "value": "skillFree,#,1027,-1",
+    "type": "1"
+  },
+  "1028": {
+    "id": "1028",
+    "enName": "skillFree",
+    "cnName": "初级狂暴",
+    "value": "skillFree,#,1028,-1",
+    "type": "1"
+  },
+  "1029": {
+    "id": "1029",
+    "enName": "skillFree",
+    "cnName": "中级狂暴",
+    "value": "skillFree,#,1029,-1",
+    "type": "1"
+  },
+  "1030": {
+    "id": "1030",
+    "enName": "skillFree",
+    "cnName": "高级狂暴",
+    "value": "skillFree,#,1030,-1",
+    "type": "1"
+  },
+  "1031": {
+    "id": "1031",
+    "enName": "skillFree",
+    "cnName": "初级核弹",
+    "value": "skillFree,#,1031,-1",
+    "type": "1"
+  },
+  "1032": {
+    "id": "1032",
+    "enName": "skillFree",
+    "cnName": "中级核弹",
+    "value": "skillFree,#,1032,-1",
+    "type": "1"
+  },
+  "1033": {
+    "id": "1033",
+    "enName": "skillFree",
+    "cnName": "高级核弹",
+    "value": "skillFree,#,1033,-1",
+    "type": "1"
+  },
+  "1034": {
+    "id": "1034",
+    "enName": "skillFree",
+    "cnName": "初级冰冻",
+    "value": "skillFree,#,1034,-1",
+    "type": "1"
+  },
+  "1035": {
+    "id": "1035",
+    "enName": "skillFree",
+    "cnName": "中级冰冻",
+    "value": "skillFree,#,1035,-1",
+    "type": "1"
+  },
+  "1036": {
+    "id": "1036",
+    "enName": "skillFree",
+    "cnName": "高级冰冻",
+    "value": "skillFree,#,1036,-1",
+    "type": "1"
+  },
+  "1037": {
+    "id": "1037",
+    "enName": "skillFree",
+    "cnName": "初级锁定",
+    "value": "skillFree,#,1037,-1",
+    "type": "1"
+  },
+  "1038": {
+    "id": "1038",
+    "enName": "skillFree",
+    "cnName": "中级锁定",
+    "value": "skillFree,#,1038,-1",
+    "type": "1"
+  },
+  "1039": {
+    "id": "1039",
+    "enName": "skillFree",
+    "cnName": "高级锁定",
+    "value": "skillFree,#,1039,-1",
+    "type": "1"
+  },
+  "1040": {
+    "id": "1040",
+    "enName": "renameCard",
+    "cnName": "改名卡",
+    "value": "renameCard,#,1040,-1",
+    "type": "1"
+  },
+  "1043": {
+    "id": "1043",
+    "enName": "addUp",
+    "cnName": "小福袋",
+    "value": "addUp,#,1043,-1",
+    "type": "1"
+  },
+  "1044": {
+    "id": "1044",
+    "enName": "addUp",
+    "cnName": "银福袋",
+    "value": "addUp,#,1044,-1",
+    "type": "1"
+  },
+  "1045": {
+    "id": "1045",
+    "enName": "addUp",
+    "cnName": "金福袋",
+    "value": "addUp,#,1045,-1",
+    "type": "1"
+  },
+  "1046": {
+    "id": "1046",
+    "enName": "addUp",
+    "cnName": "福袋材料",
+    "value": "addUp,#,1046,-1",
+    "type": "1"
+  },
+  "1047": {
+    "id": "1047",
+    "enName": "addUp",
+    "cnName": "留言卡",
+    "value": "addUp,#,1047,-1",
+    "type": "1"
+  },
+  "1059": {
+    "id": "1059",
+    "enName": "addUp",
+    "cnName": "星光碎片",
+    "value": "addUp,#,1059,-1",
+    "type": "1"
+  },
+  "1060": {
+    "id": "1060",
+    "enName": "addUp",
+    "cnName": "神秘星光碎片",
+    "value": "addUp,#,1060,-1",
+    "type": "1"
+  },
+  "1061": {
+    "id": "1061",
+    "enName": "addUp",
+    "cnName": "远古星光碎片",
+    "value": "addUp,#,1061,-1",
+    "type": "1"
+  },
+  "1062": {
+    "id": "1062",
+    "enName": "addUp",
+    "cnName": "强化石",
+    "value": "addUp,#,1062,-1",
+    "type": "1"
+  },
+  "1063": {
+    "id": "1063",
+    "enName": "addUp",
+    "cnName": "陨铁",
+    "value": "addUp,#,1063,-1",
+    "type": "1"
+  },
+  "1064": {
+    "id": "1064",
+    "enName": "addUp",
+    "cnName": "通用号角",
+    "value": "addUp,#,1064,-1",
+    "type": "1"
+  },
+  "1065": {
+    "id": "1065",
+    "enName": "addUp",
+    "cnName": "通用狂暴",
+    "value": "addUp,#,1065,-1",
+    "type": "1"
+  },
+  "1066": {
+    "id": "1066",
+    "enName": "addUp",
+    "cnName": "通用核弹",
+    "value": "addUp,#,1066,-1",
+    "type": "1"
+  },
+  "1067": {
+    "id": "1067",
+    "enName": "addUp",
+    "cnName": "通用冰冻",
+    "value": "addUp,#,1067,-1",
+    "type": "1"
+  },
+  "1068": {
+    "id": "1068",
+    "enName": "addUp",
+    "cnName": "通用锁定",
+    "value": "addUp,#,1068,-1",
+    "type": "1"
+  },
+  "1069": {
+    "id": "1069",
+    "enName": "addUp",
+    "cnName": "通用洞察（计时）",
+    "value": "addUp,1,1069,#",
+    "type": "1"
+  },
+  "1070": {
+    "id": "1070",
+    "enName": "addUp",
+    "cnName": "炮台充能（计时）",
+    "value": "addUp,1,1072,#",
+    "type": "1"
+  },
+  "1072": {
+    "id": "1072",
+    "enName": "addUp",
+    "cnName": "远古号角",
+    "value": "addUp,#,1072,-1",
+    "type": "1"
+  },
+  "1100": {
+    "id": "1100",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-小智（计时）",
+    "value": "ddzRole,1,1100,#",
+    "type": "0"
+  },
+  "1101": {
+    "id": "1101",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-柚子（计时）",
+    "value": "ddzRole,1,1101,#",
+    "type": "0"
+  },
+  "1102": {
+    "id": "1102",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-山姆（计时）",
+    "value": "ddzRole,1,1102,#",
+    "type": "0"
+  },
+  "1103": {
+    "id": "1103",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-小美（计时）",
+    "value": "ddzRole,1,1103,#",
+    "type": "0"
+  },
+  "1104": {
+    "id": "1104",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-雷克顿（计时）",
+    "value": "ddzRole,1,1104,#",
+    "type": "0"
+  },
+  "1105": {
+    "id": "1105",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-雷克顿碎片",
+    "value": "ddzRole,#,1105,-1",
+    "type": "1"
+  },
+  "1106": {
+    "id": "1106",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-关羽（计时）",
+    "value": "ddzRole,1,1106,#",
+    "type": "0"
+  },
+  "1107": {
+    "id": "1107",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-关羽碎片",
+    "value": "ddzRole,#,1107,-1",
+    "type": "1"
+  },
+  "1108": {
+    "id": "1108",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-娜儿（计时）",
+    "value": "ddzRole,1,1108,#",
+    "type": "0"
+  },
+  "1109": {
+    "id": "1109",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-娜儿碎片",
+    "value": "ddzRole,#,1109,-1",
+    "type": "1"
+  },
+  "1110": {
+    "id": "1110",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-维拉（计时）",
+    "value": "ddzRole,1,1110,#",
+    "type": "0"
+  },
+  "1111": {
+    "id": "1111",
+    "enName": "ddzRole",
+    "cnName": "斗地主人物-维拉碎片",
+    "value": "ddzRole,#,1111,-1",
+    "type": "1"
+  },
+  "1150": {
+    "id": "1150",
+    "enName": "ddzScene",
+    "cnName": "城市花园（计时）",
+    "value": "ddzScene,1,1150,#",
+    "type": "0"
+  },
+  "1151": {
+    "id": "1151",
+    "enName": "ddzScene",
+    "cnName": "都市夜景（计时）",
+    "value": "ddzScene,1,1151,#",
+    "type": "0"
+  },
+  "1152": {
+    "id": "1152",
+    "enName": "ddzScene",
+    "cnName": "闲情雅致（计时）",
+    "value": "ddzScene,1,1152,#",
+    "type": "0"
+  },
+  "1153": {
+    "id": "1153",
+    "enName": "ddzScene",
+    "cnName": "闲暇小憩（计时）",
+    "value": "ddzScene,1,1153,#",
+    "type": "0"
+  },
+  "1154": {
+    "id": "1154",
+    "enName": "ddzScene",
+    "cnName": "阳光沙滩（计时）",
+    "value": "ddzScene,1,1154,#",
+    "type": "0"
+  },
+  "1155": {
+    "id": "1155",
+    "enName": "ddzScene",
+    "cnName": "斗地主-暖冬落日场景（计时）",
+    "value": "ddzScene,1,1155,#",
+    "type": "0"
+  },
+  "1156": {
+    "id": "1156",
+    "enName": "ddzScene",
+    "cnName": "斗地主-暖冬落日场景-碎片",
+    "value": "ddzScene,#,1156,-1",
+    "type": "1"
+  },
+  "1157": {
+    "id": "1157",
+    "enName": "ddzScene",
+    "cnName": "斗地主-春风和煦场景（计时）",
+    "value": "ddzScene,1,1157,#",
+    "type": "0"
+  },
+  "1158": {
+    "id": "1158",
+    "enName": "ddzScene",
+    "cnName": "斗地主-春风和煦场景碎片",
+    "value": "ddzScene,#,1158,-1",
+    "type": "1"
+  },
+  "1159": {
+    "id": "1159",
+    "enName": "ddzScene",
+    "cnName": "斗地主-宁静夏夜场景（计时）",
+    "value": "ddzScene,1,1159,#",
+    "type": "0"
+  },
+  "1160": {
+    "id": "1160",
+    "enName": "ddzScene",
+    "cnName": "斗地主-宁静夏夜场景碎片",
+    "value": "ddzScene,#,1160,-1",
+    "type": "1"
+  },
+  "1161": {
+    "id": "1161",
+    "enName": "ddzScene",
+    "cnName": "斗地主-深秋公寓场景（计时）",
+    "value": "ddzScene,1,1161,#",
+    "type": "0"
+  },
+  "1162": {
+    "id": "1162",
+    "enName": "ddzScene",
+    "cnName": "斗地主-深秋公寓场景碎片",
+    "value": "ddzScene,#,1162,-1",
+    "type": "1"
+  },
+  "1163": {
+    "id": "1163",
+    "enName": "ddzScene",
+    "cnName": "斗地主-海滨奇趣场景（计时）",
+    "value": "ddzScene,1,1163,#",
+    "type": "0"
+  },
+  "1164": {
+    "id": "1164",
+    "enName": "ddzScene",
+    "cnName": "斗地主-海滨奇趣场景碎片",
+    "value": "ddzScene,#,1164,-1",
+    "type": "1"
+  },
+  "1165": {
+    "id": "1165",
+    "enName": "ddzScene",
+    "cnName": "斗地主-蜀山仙境场景（计时）",
+    "value": "ddzScene,1,1165,#",
+    "type": "0"
+  },
+  "1166": {
+    "id": "1166",
+    "enName": "ddzScene",
+    "cnName": "斗地主-蜀山仙境场景碎片",
+    "value": "ddzScene,#,1166,-1",
+    "type": "1"
+  },
+  "1167": {
+    "id": "1167",
+    "enName": "ddzScene",
+    "cnName": "斗地主-拉斯维加斯场景（计时）",
+    "value": "ddzScene,1,1167,#",
+    "type": "0"
+  },
+  "1168": {
+    "id": "1168",
+    "enName": "ddzScene",
+    "cnName": "斗地主-拉斯维加斯场景碎片",
+    "value": "ddzScene,#,1168,-1",
+    "type": "1"
+  },
+  "1169": {
+    "id": "1169",
+    "enName": "ddzScene",
+    "cnName": "斗地主-新春贺岁场景（计时）",
+    "value": "ddzScene,1,1169,#",
+    "type": "0"
+  },
+  "1170": {
+    "id": "1170",
+    "enName": "ddzScene",
+    "cnName": "斗地主-新春贺岁场景碎片",
+    "value": "ddzScene,#,1170,-1",
+    "type": "1"
+  },
+  "1171": {
+    "id": "1171",
+    "enName": "ddzScene",
+    "cnName": "斗地主-兰亭望秋场景（计时）",
+    "value": "ddzScene,1,1171,#",
+    "type": "0"
+  },
+  "1172": {
+    "id": "1172",
+    "enName": "ddzScene",
+    "cnName": "斗地主-兰亭望秋场景碎片",
+    "value": "ddzScene,#,1172,-1",
+    "type": "1"
+  },
+  "1173": {
+    "id": "1173",
+    "enName": "ddzScene",
+    "cnName": "斗地主-西部酒馆场景（计时）",
+    "value": "ddzScene,1,1173,#",
+    "type": "0"
+  },
+  "1174": {
+    "id": "1174",
+    "enName": "ddzScene",
+    "cnName": "斗地主-西部酒馆场景碎片",
+    "value": "ddzScene,#,1174,-1",
+    "type": "1"
+  },
+  "1201": {
+    "id": "1201",
+    "enName": "item",
+    "cnName": "初始自动开炮(计时)",
+    "value": "item,1,1201,#",
+    "type": "0"
+  },
+  "1301": {
+    "id": "1301",
+    "enName": "item",
+    "cnName": "自行车(金花座驾)",
+    "value": "item,#,1301,-1",
+    "type": "1"
+  },
+  "1302": {
+    "id": "1302",
+    "enName": "item",
+    "cnName": "三轮车(金花座驾)",
+    "value": "item,#,1302,-1",
+    "type": "1"
+  },
+  "1303": {
+    "id": "1303",
+    "enName": "item",
+    "cnName": "电动车(金花座驾)",
+    "value": "item,#,1303,-1",
+    "type": "1"
+  },
+  "1304": {
+    "id": "1304",
+    "enName": "item",
+    "cnName": "摩托车(金花座驾)",
+    "value": "item,#,1304,-1",
+    "type": "1"
+  },
+  "1305": {
+    "id": "1305",
+    "enName": "item",
+    "cnName": "大众(金花座驾)",
+    "value": "item,#,1305,-1",
+    "type": "1"
+  },
+  "1306": {
+    "id": "1306",
+    "enName": "item",
+    "cnName": "宝马(金花座驾)",
+    "value": "item,#,1306,-1",
+    "type": "1"
+  },
+  "1307": {
+    "id": "1307",
+    "enName": "item",
+    "cnName": "奔驰(金花座驾)",
+    "value": "item,#,1307,-1",
+    "type": "1"
+  },
+  "1308": {
+    "id": "1308",
+    "enName": "item",
+    "cnName": "玛莎拉蒂(金花座驾)",
+    "value": "item,#,1308,-1",
+    "type": "1"
+  },
+  "1309": {
+    "id": "1309",
+    "enName": "item",
+    "cnName": "布加迪威龙(金花座驾)",
+    "value": "item,#,1309,-1",
+    "type": "1"
+  },
+  "1310": {
+    "id": "1310",
+    "enName": "item",
+    "cnName": "兰博基尼(金花座驾)",
+    "value": "item,#,1310,-1",
+    "type": "1"
+  },
+  "1401": {
+    "id": "1401",
+    "enName": "item",
+    "cnName": "赌圣(金花称号)",
+    "value": "item,#,1401,-1",
+    "type": "1"
+  },
+  "1402": {
+    "id": "1402",
+    "enName": "item",
+    "cnName": "发哥(金花称号)",
+    "value": "item,#,1402,-1",
+    "type": "1"
+  },
+  "1403": {
+    "id": "1403",
+    "enName": "item",
+    "cnName": "瑞雪迎春(金花称号)",
+    "value": "item,#,1403,-1",
+    "type": "1"
+  },
+  "1404": {
+    "id": "1404",
+    "enName": "item",
+    "cnName": "资深赌徒(金花称号)",
+    "value": "item,#,1404,-1",
+    "type": "1"
+  },
+  "1405": {
+    "id": "1405",
+    "enName": "item",
+    "cnName": "充点小钱(金花称号)",
+    "value": "item,#,1405,-1",
+    "type": "1"
+  },
+  "1406": {
+    "id": "1406",
+    "enName": "item",
+    "cnName": "小富翁(金花称号)",
+    "value": "item,#,1406,-1",
+    "type": "1"
+  },
+  "1407": {
+    "id": "1407",
+    "enName": "item",
+    "cnName": "大富翁(金花称号)",
+    "value": "item,#,1407,-1",
+    "type": "1"
+  },
+  "1408": {
+    "id": "1408",
+    "enName": "item",
+    "cnName": "壕气逼人(金花称号)",
+    "value": "item,#,1408,-1",
+    "type": "1"
+  },
+  "1409": {
+    "id": "1409",
+    "enName": "item",
+    "cnName": "壕气冲天(金花称号)",
+    "value": "item,#,1409,-1",
+    "type": "1"
+  },
+  "1410": {
+    "id": "1410",
+    "enName": "item",
+    "cnName": "至尊神壕(金花称号)",
+    "value": "item,#,1410,-1",
+    "type": "1"
+  },
+  "1996": {
+    "id": "1996",
+    "enName": "item",
+    "cnName": "华为nova",
+    "value": "item,#,1996,-1",
+    "type": "1"
+  },
+  "1997": {
+    "id": "1997",
+    "enName": "item",
+    "cnName": "50元京东购物",
+    "value": "item,#,1997,-1",
+    "type": "1"
+  },
+  "1998": {
+    "id": "1998",
+    "enName": "item",
+    "cnName": "华为V20手机",
+    "value": "item,#,1998,-1",
+    "type": "1"
+  },
+  "1999": {
+    "id": "1999",
+    "enName": "item",
+    "cnName": "抱枕",
+    "value": "item,#,1999,-1",
+    "type": "1"
+  },
+  "2000": {
+    "id": "2000",
+    "enName": "item",
+    "cnName": "移动电源",
+    "value": "item,#,2000,-1",
+    "type": "1"
+  },
+  "2001": {
+    "id": "2001",
+    "enName": "zippo",
+    "cnName": "ZIPPO打火机",
+    "value": "zippo,#,2001,-1",
+    "type": "1"
+  },
+  "2002": {
+    "id": "2002",
+    "enName": "charger",
+    "cnName": "充电宝",
+    "value": "charger,#,2002,-1",
+    "type": "1"
+  },
+  "2003": {
+    "id": "2003",
+    "enName": "headset",
+    "cnName": "耳机",
+    "value": "headset,#,2003,-1",
+    "type": "1"
+  },
+  "2004": {
+    "id": "2004",
+    "enName": "android",
+    "cnName": "安卓手机",
+    "value": "android,#,2004,-1",
+    "type": "1"
+  },
+  "2005": {
+    "id": "2005",
+    "enName": "ipad",
+    "cnName": "平板",
+    "value": "ipad,#,2005,-1",
+    "type": "1"
+  },
+  "2006": {
+    "id": "2006",
+    "enName": "billCard",
+    "cnName": "30话费",
+    "value": "billCard,#,2006,-1",
+    "type": "1"
+  },
+  "2007": {
+    "id": "2007",
+    "enName": "billCard",
+    "cnName": "50话费",
+    "value": "billCard,#,2007,-1",
+    "type": "1"
+  },
+  "2008": {
+    "id": "2008",
+    "enName": "billCard",
+    "cnName": "100话费",
+    "value": "billCard,#,2008,-1",
+    "type": "1"
+  },
+  "2009": {
+    "id": "2009",
+    "enName": "billCard",
+    "cnName": "300话费",
+    "value": "billCard,#,2009,-1",
+    "type": "1"
+  },
+  "2010": {
+    "id": "2010",
+    "enName": "billCard",
+    "cnName": "500话费",
+    "value": "billCard,#,2010,-1",
+    "type": "1"
+  },
+  "2011": {
+    "id": "2011",
+    "enName": "shoppingCard",
+    "cnName": "100购物券",
+    "value": "shoppingCard,#,2011,-1",
+    "type": "1"
+  },
+  "2012": {
+    "id": "2012",
+    "enName": "shoppingCard",
+    "cnName": "200购物券",
+    "value": "shoppingCard,#,2012,-1",
+    "type": "1"
+  },
+  "2013": {
+    "id": "2013",
+    "enName": "shoppingCard",
+    "cnName": "300购物券",
+    "value": "shoppingCard,#,2013,-1",
+    "type": "1"
+  },
+  "2014": {
+    "id": "2014",
+    "enName": "shoppingCard",
+    "cnName": "500购物券",
+    "value": "shoppingCard,#,2014,-1",
+    "type": "1"
+  },
+  "2015": {
+    "id": "2015",
+    "enName": "shoppingCard",
+    "cnName": "600购物券",
+    "value": "shoppingCard,#,2015,-1",
+    "type": "1"
+  },
+  "2016": {
+    "id": "2016",
+    "enName": "shoppingCard",
+    "cnName": "800购物券",
+    "value": "shoppingCard,#,2016,-1",
+    "type": "1"
+  },
+  "2017": {
+    "id": "2017",
+    "enName": "shoppingCard",
+    "cnName": "1000购物券",
+    "value": "shoppingCard,#,2017,-1",
+    "type": "1"
+  },
+  "2018": {
+    "id": "2018",
+    "enName": "billCard",
+    "cnName": "20话费",
+    "value": "billCard,#,2018,-1",
+    "type": "1"
+  },
+  "2019": {
+    "id": "2019",
+    "enName": "billCard",
+    "cnName": "10话费",
+    "value": "billCard,#,2019,-1",
+    "type": "1"
+  },
+  "2020": {
+    "id": "2020",
+    "enName": "iphone",
+    "cnName": "苹果手机",
+    "value": "iphone,#,2020,-1",
+    "type": "1"
+  },
+  "2021": {
+    "id": "2021",
+    "enName": "watch",
+    "cnName": "手表",
+    "value": "watch,#,2021,-1",
+    "type": "1"
+  },
+  "2022": {
+    "id": "2022",
+    "enName": "billCard",
+    "cnName": "200话费",
+    "value": "billCard,#,2022,-1",
+    "type": "1"
+  },
+  "2023": {
+    "id": "2023",
+    "enName": "billCard",
+    "cnName": "1元话费",
+    "value": "billCard,#,2023,-1",
+    "type": "1"
+  },
+  "2024": {
+    "id": "2024",
+    "enName": "dataPlan",
+    "cnName": "100MB流量",
+    "value": "dataPlan,#,2024,-1",
+    "type": "1"
+  },
+  "2025": {
+    "id": "2025",
+    "enName": "dataPlan",
+    "cnName": "500MB流量",
+    "value": "dataPlan,#,2025,-1",
+    "type": "1"
+  },
+  "2026": {
+    "id": "2026",
+    "enName": "billCard",
+    "cnName": "2元话费",
+    "value": "billCard,#,2026,-1",
+    "type": "1"
+  },
+  "2027": {
+    "id": "2027",
+    "enName": "billCard",
+    "cnName": "6元话费",
+    "value": "billCard,#,2027,-1",
+    "type": "1"
+  },
+  "2028": {
+    "id": "2028",
+    "enName": "ipad",
+    "cnName": "ipad（计时）",
+    "value": "ipad,1,2028,#",
+    "type": "0"
+  },
+  "2029": {
+    "id": "2029",
+    "enName": "ndGold",
+    "cnName": "扭蛋币1",
+    "value": "ndGold,#,2029",
+    "type": "1"
+  },
+  "2030": {
+    "id": "2030",
+    "enName": "ndGold",
+    "cnName": "扭蛋币2",
+    "value": "ndGold,#,2030",
+    "type": "1"
+  },
+  "2031": {
+    "id": "2031",
+    "enName": "ndGold",
+    "cnName": "扭蛋币3",
+    "value": "ndGold,#,2031",
+    "type": "1"
+  },
+  "2033": {
+    "id": "2033",
+    "enName": "addUp",
+    "cnName": "5g黄金",
+    "value": "addUp,#,2033",
+    "type": "1"
+  },
+  "2034": {
+    "id": "2034",
+    "enName": "addUp",
+    "cnName": "10g黄金",
+    "value": "addUp,#,2034",
+    "type": "1"
+  },
+  "2035": {
+    "id": "2035",
+    "enName": "addUp",
+    "cnName": "20g黄金",
+    "value": "addUp,#,2035",
+    "type": "1"
+  },
+  "2036": {
+    "id": "2036",
+    "enName": "addUp",
+    "cnName": "50g黄金",
+    "value": "addUp,#,2036",
+    "type": "1"
+  },
+  "2037": {
+    "id": "2037",
+    "enName": "addUp",
+    "cnName": "100g黄金",
+    "value": "addUp,#,2037",
+    "type": "1"
+  },
+  "3000": {
+    "id": "3000",
+    "enName": "cannon",
+    "cnName": "基础炮台（计时）",
+    "value": "cannon,1,3000,#",
+    "type": "0"
+  },
+  "3001": {
+    "id": "3001",
+    "enName": "cannon",
+    "cnName": "新手之光（计时）",
+    "value": "cannon,1,3001,#",
+    "type": "0"
+  },
+  "3011": {
+    "id": "3011",
+    "enName": "cannon",
+    "cnName": "深蓝海皇（计时）",
+    "value": "cannon,1,3011,#",
+    "type": "0"
+  },
+  "3012": {
+    "id": "3012",
+    "enName": "cannon",
+    "cnName": "金龙狂舞（计时）",
+    "value": "cannon,1,3012,#",
+    "type": "0"
+  },
+  "3013": {
+    "id": "3013",
+    "enName": "cannon",
+    "cnName": "首岁液氮（计时）",
+    "value": "cannon,1,3013,#",
+    "type": "0"
+  },
+  "3014": {
+    "id": "3014",
+    "enName": "cannon",
+    "cnName": "千步穿杨（计时）",
+    "value": "cannon,1,3014,#",
+    "type": "0"
+  },
+  "3015": {
+    "id": "3015",
+    "enName": "cannon",
+    "cnName": "钢铁朋克（计时）",
+    "value": "cannon,1,3015,#",
+    "type": "0"
+  },
+  "3016": {
+    "id": "3016",
+    "enName": "cannon",
+    "cnName": "蒸汽时代（计时）",
+    "value": "cannon,1,3016,#",
+    "type": "0"
+  },
+  "3017": {
+    "id": "3017",
+    "enName": "cannon",
+    "cnName": "擎天柱（计时）",
+    "value": "cannon,1,3017,#",
+    "type": "0"
+  },
+  "3018": {
+    "id": "3018",
+    "enName": "cannon",
+    "cnName": "花飞蝶舞（计时）",
+    "value": "cannon,1,3018,#",
+    "type": "0"
+  },
+  "3019": {
+    "id": "3019",
+    "enName": "cannon",
+    "cnName": "觅心猎手（计时）",
+    "value": "cannon,1,3019,#",
+    "type": "0"
+  },
+  "3020": {
+    "id": "3020",
+    "enName": "cannon",
+    "cnName": "大黄蜂（计时）",
+    "value": "cannon,1,3020,#",
+    "type": "0"
+  },
+  "3021": {
+    "id": "3021",
+    "enName": "cannon",
+    "cnName": "赤红风暴（计时）",
+    "value": "cannon,1,3021,#",
+    "type": "0"
+  },
+  "3022": {
+    "id": "3022",
+    "enName": "cannon",
+    "cnName": "震荡波（计时）",
+    "value": "cannon,1,3022,#",
+    "type": "0"
+  },
+  "3023": {
+    "id": "3023",
+    "enName": "cannon",
+    "cnName": "方天（计时）",
+    "value": "cannon,1,3023,#",
+    "type": "0"
+  },
+  "3024": {
+    "id": "3024",
+    "enName": "cannon",
+    "cnName": "招财（计时）",
+    "value": "cannon,1,3024,#",
+    "type": "0"
+  },
+  "3025": {
+    "id": "3025",
+    "enName": "cannon",
+    "cnName": "老君炉（计时）",
+    "value": "cannon,1,3025,#",
+    "type": "0"
+  },
+  "3027": {
+    "id": "3027",
+    "enName": "cannon",
+    "cnName": "天喵侠（计时）",
+    "value": "cannon,1,3027,#",
+    "type": "0"
+  },
+  "3028": {
+    "id": "3028",
+    "enName": "cannon",
+    "cnName": "贺岁金猪（计时）",
+    "value": "cannon,1,3028,#",
+    "type": "0"
+  },
+  "3029": {
+    "id": "3029",
+    "enName": "cannon",
+    "cnName": "谷神（计时）",
+    "value": "cannon,1,3029,#",
+    "type": "0"
+  },
+  "3030": {
+    "id": "3030",
+    "enName": "cannon",
+    "cnName": "SONA（计时）",
+    "value": "cannon,1,3030,#",
+    "type": "0"
+  },
+  "3031": {
+    "id": "3031",
+    "enName": "cannon",
+    "cnName": "射手座（计时）",
+    "value": "cannon,1,3031,#",
+    "type": "0"
+  },
+  "3032": {
+    "id": "3032",
+    "enName": "cannon",
+    "cnName": "狮子座（计时）",
+    "value": "cannon,1,3032,#",
+    "type": "0"
+  },
+  "3033": {
+    "id": "3033",
+    "enName": "cannon",
+    "cnName": "白羊座（计时）",
+    "value": "cannon,1,3033,#",
+    "type": "0"
+  },
+  "3034": {
+    "id": "3034",
+    "enName": "cannon",
+    "cnName": "摩羯座（计时）",
+    "value": "cannon,1,3034,#",
+    "type": "0"
+  },
+  "3035": {
+    "id": "3035",
+    "enName": "cannon",
+    "cnName": "巨蟹座（计时）",
+    "value": "cannon,1,3035,#",
+    "type": "0"
+  },
+  "3061": {
+    "id": "3061",
+    "enName": "cannon",
+    "cnName": "绿色堡垒（计时）",
+    "value": "cannon,1,3061,#",
+    "type": "0"
+  },
+  "3062": {
+    "id": "3062",
+    "enName": "cannon",
+    "cnName": "金色闪耀（计时）",
+    "value": "cannon,1,3062,#",
+    "type": "0"
+  },
+  "3063": {
+    "id": "3063",
+    "enName": "cannon",
+    "cnName": "蝙蝠之翼（计时）",
+    "value": "cannon,1,3063,#",
+    "type": "0"
+  },
+  "3064": {
+    "id": "3064",
+    "enName": "cannon",
+    "cnName": "天才弄臣（计时）",
+    "value": "cannon,1,3064,#",
+    "type": "0"
+  },
+  "4101": {
+    "id": "4101",
+    "enName": "title",
+    "cnName": "金花新秀（计时）",
+    "value": "title,1,4101,#",
+    "type": "0"
+  },
+  "4102": {
+    "id": "4102",
+    "enName": "title",
+    "cnName": "金花达人（计时）",
+    "value": "title,1,4102,#",
+    "type": "0"
+  },
+  "4103": {
+    "id": "4103",
+    "enName": "title",
+    "cnName": "金花专家（计时）",
+    "value": "title,1,4103,#",
+    "type": "0"
+  },
+  "4104": {
+    "id": "4104",
+    "enName": "title",
+    "cnName": "金花大亨（计时）",
+    "value": "title,1,4104,#",
+    "type": "0"
+  },
+  "4105": {
+    "id": "4105",
+    "enName": "title",
+    "cnName": "金花大咖（计时）",
+    "value": "title,1,4105,#",
+    "type": "0"
+  },
+  "4106": {
+    "id": "4106",
+    "enName": "title",
+    "cnName": "金花大神（计时）",
+    "value": "title,1,4106,#",
+    "type": "0"
+  },
+  "4107": {
+    "id": "4107",
+    "enName": "title",
+    "cnName": "金花宗师（计时）",
+    "value": "title,1,4107,#",
+    "type": "0"
+  },
+  "4108": {
+    "id": "4108",
+    "enName": "title",
+    "cnName": "金花霸主（计时）",
+    "value": "title,1,4108,#",
+    "type": "0"
+  },
+  "4109": {
+    "id": "4109",
+    "enName": "title",
+    "cnName": "金花王者（计时）",
+    "value": "title,1,4109,#",
+    "type": "0"
+  },
+  "4110": {
+    "id": "4110",
+    "enName": "title",
+    "cnName": "金花至尊（计时）",
+    "value": "title,1,4110,#",
+    "type": "0"
+  },
+  "4111": {
+    "id": "4111",
+    "enName": "title",
+    "cnName": "老司机（计时）  ",
+    "value": "title,1,4111,#",
+    "type": "0"
+  },
+  "4112": {
+    "id": "4112",
+    "enName": "title",
+    "cnName": "骨灰牌手（计时）",
+    "value": "title,1,4112,#",
+    "type": "0"
+  },
+  "4113": {
+    "id": "4113",
+    "enName": "title",
+    "cnName": "白手起家（计时）",
+    "value": "title,1,4113,#",
+    "type": "0"
+  },
+  "4114": {
+    "id": "4114",
+    "enName": "title",
+    "cnName": "生财有道（计时）",
+    "value": "title,1,4114,#",
+    "type": "0"
+  },
+  "4115": {
+    "id": "4115",
+    "enName": "title",
+    "cnName": "财运亨通（计时）",
+    "value": "title,1,4115,#",
+    "type": "0"
+  },
+  "4116": {
+    "id": "4116",
+    "enName": "title",
+    "cnName": "家财万贯（计时）",
+    "value": "title,1,4116,#",
+    "type": "0"
+  },
+  "4117": {
+    "id": "4117",
+    "enName": "title",
+    "cnName": "富甲一方（计时）",
+    "value": "title,1,4117,#",
+    "type": "0"
+  },
+  "4118": {
+    "id": "4118",
+    "enName": "title",
+    "cnName": "富可敌国（计时）",
+    "value": "title,1,4118,#",
+    "type": "0"
+  },
+  "4119": {
+    "id": "4119",
+    "enName": "title",
+    "cnName": "十人斩（计时）",
+    "value": "title,1,4119,#",
+    "type": "0"
+  },
+  "4120": {
+    "id": "4120",
+    "enName": "title",
+    "cnName": "百人斩（计时）",
+    "value": "title,1,4120,#",
+    "type": "0"
+  },
+  "4121": {
+    "id": "4121",
+    "enName": "title",
+    "cnName": "千人斩（计时）",
+    "value": "title,1,4121,#",
+    "type": "0"
+  },
+  "4122": {
+    "id": "4122",
+    "enName": "title",
+    "cnName": "大魔王（计时）",
+    "value": "title,1,4122,#",
+    "type": "0"
+  },
+  "4123": {
+    "id": "4123",
+    "enName": "title",
+    "cnName": "福星高照（计时）",
+    "value": "title,1,4123,#",
+    "type": "0"
+  },
+  "4124": {
+    "id": "4124",
+    "enName": "title",
+    "cnName": "通天神运（计时）",
+    "value": "title,1,4124,#",
+    "type": "0"
+  },
+  "4125": {
+    "id": "4125",
+    "enName": "title",
+    "cnName": "百战百胜（计时）",
+    "value": "title,1,4125,#",
+    "type": "0"
+  },
+  "4126": {
+    "id": "4126",
+    "enName": "title",
+    "cnName": "常胜将军（计时）",
+    "value": "title,1,4126,#",
+    "type": "0"
+  },
+  "4127": {
+    "id": "4127",
+    "enName": "title",
+    "cnName": "战无不胜（计时）",
+    "value": "title,1,4127,#",
+    "type": "0"
+  },
+  "4128": {
+    "id": "4128",
+    "enName": "title",
+    "cnName": "坐庄达人（计时）",
+    "value": "title,1,4128,#",
+    "type": "0"
+  },
+  "4129": {
+    "id": "4129",
+    "enName": "title",
+    "cnName": "万人之上（计时）",
+    "value": "title,1,4129,#",
+    "type": "0"
+  },
+  "4130": {
+    "id": "4130",
+    "enName": "title",
+    "cnName": "爆庄达人（计时）",
+    "value": "title,1,4130,#",
+    "type": "0"
+  },
+  "4131": {
+    "id": "4131",
+    "enName": "title",
+    "cnName": "庄家克星（计时）",
+    "value": "title,1,4131,#",
+    "type": "0"
+  },
+  "4132": {
+    "id": "4132",
+    "enName": "title",
+    "cnName": "挥金如土（计时）",
+    "value": "title,1,4132,#",
+    "type": "0"
+  },
+  "4133": {
+    "id": "4133",
+    "enName": "title",
+    "cnName": "扶贫办（计时）",
+    "value": "title,1,4133,#",
+    "type": "0"
+  },
+  "4134": {
+    "id": "4134",
+    "enName": "title",
+    "cnName": "散财童子（计时）",
+    "value": "title,1,4134,#",
+    "type": "0"
+  },
+  "4135": {
+    "id": "4135",
+    "enName": "title",
+    "cnName": "慈善赌王（计时）",
+    "value": "title,1,4135,#",
+    "type": "0"
+  },
+  "4136": {
+    "id": "4136",
+    "enName": "title",
+    "cnName": "青龙使（计时）",
+    "value": "title,1,4136,#",
+    "type": "0"
+  },
+  "4137": {
+    "id": "4137",
+    "enName": "title",
+    "cnName": "青龙尊者（计时）",
+    "value": "title,1,4137,#",
+    "type": "0"
+  },
+  "4138": {
+    "id": "4138",
+    "enName": "title",
+    "cnName": "朱雀使（计时）",
+    "value": "title,1,4138,#",
+    "type": "0"
+  },
+  "4139": {
+    "id": "4139",
+    "enName": "title",
+    "cnName": "朱雀尊者（计时）",
+    "value": "title,1,4139,#",
+    "type": "0"
+  },
+  "4140": {
+    "id": "4140",
+    "enName": "title",
+    "cnName": "白虎使（计时）",
+    "value": "title,1,4140,#",
+    "type": "0"
+  },
+  "4141": {
+    "id": "4141",
+    "enName": "title",
+    "cnName": "白虎尊者（计时）",
+    "value": "title,1,4141,#",
+    "type": "0"
+  },
+  "4142": {
+    "id": "4142",
+    "enName": "title",
+    "cnName": "玄武使（计时）",
+    "value": "title,1,4142,#",
+    "type": "0"
+  },
+  "4143": {
+    "id": "4143",
+    "enName": "title",
+    "cnName": "玄武尊者（计时）",
+    "value": "title,1,4143,#",
+    "type": "0"
+  },
+  "4144": {
+    "id": "4144",
+    "enName": "title",
+    "cnName": "过三关（计时）",
+    "value": "title,1,4144,#",
+    "type": "0"
+  },
+  "4201": {
+    "id": "4201",
+    "enName": "title",
+    "cnName": "金花铁粉（计时）",
+    "value": "title,1,4201,#",
+    "type": "0"
+  },
+  "4202": {
+    "id": "4202",
+    "enName": "title",
+    "cnName": "狗年大吉（计时）",
+    "value": "title,1,4202,#",
+    "type": "0"
+  },
+  "4301": {
+    "id": "4301",
+    "enName": "title",
+    "cnName": "金花斗士（计时）",
+    "value": "title,1,4301,#",
+    "type": "0"
+  },
+  "4302": {
+    "id": "4302",
+    "enName": "title",
+    "cnName": "赌神（计时）",
+    "value": "title,1,4302,#",
+    "type": "0"
+  },
+  "4303": {
+    "id": "4303",
+    "enName": "title",
+    "cnName": "赌圣（计时）",
+    "value": "title,1,4303,#",
+    "type": "0"
+  },
+  "4304": {
+    "id": "4304",
+    "enName": "title",
+    "cnName": "发哥（计时）",
+    "value": "title,1,4304,#",
+    "type": "0"
+  },
+  "4305": {
+    "id": "4305",
+    "enName": "title",
+    "cnName": "瑞雪旺春（计时）",
+    "value": "title,1,4305,#",
+    "type": "0"
+  },
+  "4306": {
+    "id": "4306",
+    "enName": "title",
+    "cnName": "资深赌徒（计时）",
+    "value": "title,1,4306,#",
+    "type": "0"
+  },
+  "4307": {
+    "id": "4307",
+    "enName": "title",
+    "cnName": "充点小钱（计时）",
+    "value": "title,1,4307,#",
+    "type": "0"
+  },
+  "4308": {
+    "id": "4308",
+    "enName": "title",
+    "cnName": "小富翁（计时）",
+    "value": "title,1,4308,#",
+    "type": "0"
+  },
+  "4309": {
+    "id": "4309",
+    "enName": "title",
+    "cnName": "大富翁（计时）",
+    "value": "title,1,4309,#",
+    "type": "0"
+  },
+  "4310": {
+    "id": "4310",
+    "enName": "title",
+    "cnName": "壕气逼人（计时）",
+    "value": "title,1,4310,#",
+    "type": "0"
+  },
+  "4311": {
+    "id": "4311",
+    "enName": "title",
+    "cnName": "壕气冲天（计时）",
+    "value": "title,1,4311,#",
+    "type": "0"
+  },
+  "4312": {
+    "id": "4312",
+    "enName": "title",
+    "cnName": "至尊神壕（计时）",
+    "value": "title,1,4312,#",
+    "type": "0"
+  },
+  "5001": {
+    "id": "5001",
+    "enName": "tiger",
+    "cnName": "下注翻倍卡",
+    "value": "tiger,#,5001,-1",
+    "type": "1"
+  },
+  "5002": {
+    "id": "5002",
+    "enName": "tiger",
+    "cnName": "爆庄保险卡",
+    "value": "tiger,#,5002,-1",
+    "type": "1"
+  },
+  "5003": {
+    "id": "5003",
+    "enName": "tiger",
+    "cnName": "抢庄卡",
+    "value": "tiger,#,5003,-1",
+    "type": "1"
+  },
+  "5041": {
+    "id": "5041",
+    "enName": "tiger",
+    "cnName": "小丑鱼碎片",
+    "value": "tiger,#,5041,-1",
+    "type": "1"
+  },
+  "5042": {
+    "id": "5042",
+    "enName": "tiger",
+    "cnName": "灯笼鱼碎片",
+    "value": "tiger,#,5042,-1",
+    "type": "1"
+  },
+  "5043": {
+    "id": "5043",
+    "enName": "tiger",
+    "cnName": "河豚碎片",
+    "value": "tiger,#,5043,-1",
+    "type": "1"
+  },
+  "5044": {
+    "id": "5044",
+    "enName": "tiger",
+    "cnName": "斑点鱼碎片",
+    "value": "tiger,#,5044,-1",
+    "type": "1"
+  },
+  "5045": {
+    "id": "5045",
+    "enName": "tiger",
+    "cnName": "海龟碎片",
+    "value": "tiger,#,5045,-1",
+    "type": "1"
+  },
+  "5046": {
+    "id": "5046",
+    "enName": "tiger",
+    "cnName": "蝴蝶鱼碎片",
+    "value": "tiger,#,5046,-1",
+    "type": "1"
+  },
+  "5047": {
+    "id": "5047",
+    "enName": "tiger",
+    "cnName": "旗鱼碎片",
+    "value": "tiger,#,5047,-1",
+    "type": "1"
+  },
+  "5048": {
+    "id": "5048",
+    "enName": "tiger",
+    "cnName": "电鳗碎片",
+    "value": "tiger,#,5048,-1",
+    "type": "1"
+  },
+  "5049": {
+    "id": "5049",
+    "enName": "tiger",
+    "cnName": "魔鬼鱼碎片",
+    "value": "tiger,#,5049,-1",
+    "type": "1"
+  },
+  "5050": {
+    "id": "5050",
+    "enName": "tiger",
+    "cnName": "海豚碎片",
+    "value": "tiger,#,5050,-1",
+    "type": "1"
+  },
+  "5051": {
+    "id": "5051",
+    "enName": "tiger",
+    "cnName": "鲸鱼碎片",
+    "value": "tiger,#,5051,-1",
+    "type": "1"
+  },
+  "5052": {
+    "id": "5052",
+    "enName": "tiger",
+    "cnName": "鲨鱼碎片",
+    "value": "tiger,#,5052,-1",
+    "type": "1"
+  },
+  "5053": {
+    "id": "5053",
+    "enName": "tiger",
+    "cnName": "小丑鱼",
+    "value": "tiger,#,5053,-1",
+    "type": "1"
+  },
+  "5054": {
+    "id": "5054",
+    "enName": "tiger",
+    "cnName": "灯笼鱼",
+    "value": "tiger,#,5054,-1",
+    "type": "1"
+  },
+  "5055": {
+    "id": "5055",
+    "enName": "tiger",
+    "cnName": "河豚",
+    "value": "tiger,#,5055,-1",
+    "type": "1"
+  },
+  "5056": {
+    "id": "5056",
+    "enName": "tiger",
+    "cnName": "斑点鱼",
+    "value": "tiger,#,5056,-1",
+    "type": "1"
+  },
+  "5057": {
+    "id": "5057",
+    "enName": "tiger",
+    "cnName": "海龟",
+    "value": "tiger,#,5057,-1",
+    "type": "1"
+  },
+  "5058": {
+    "id": "5058",
+    "enName": "tiger",
+    "cnName": "蝴蝶鱼",
+    "value": "tiger,#,5058,-1",
+    "type": "1"
+  },
+  "5059": {
+    "id": "5059",
+    "enName": "tiger",
+    "cnName": "旗鱼",
+    "value": "tiger,#,5059,-1",
+    "type": "1"
+  },
+  "5060": {
+    "id": "5060",
+    "enName": "tiger",
+    "cnName": "电鳗",
+    "value": "tiger,#,5060,-1",
+    "type": "1"
+  },
+  "5061": {
+    "id": "5061",
+    "enName": "tiger",
+    "cnName": "魔鬼鱼",
+    "value": "tiger,#,5061,-1",
+    "type": "1"
+  },
+  "5062": {
+    "id": "5062",
+    "enName": "tiger",
+    "cnName": "海豚",
+    "value": "tiger,#,5062,-1",
+    "type": "1"
+  },
+  "5063": {
+    "id": "5063",
+    "enName": "tiger",
+    "cnName": "鲸鱼",
+    "value": "tiger,#,5063,-1",
+    "type": "1"
+  },
+  "5064": {
+    "id": "5064",
+    "enName": "tiger",
+    "cnName": "鲨鱼",
+    "value": "tiger,#,5064,-1",
+    "type": "1"
+  },
+  "5065": {
+    "id": "5065",
+    "enName": "tiger",
+    "cnName": "初级加速",
+    "value": "tiger,#,5065,-1",
+    "type": "1"
+  },
+  "5066": {
+    "id": "5066",
+    "enName": "tiger",
+    "cnName": "高级加速",
+    "value": "tiger,#,5066,-1",
+    "type": "1"
+  },
+  "5067": {
+    "id": "5067",
+    "enName": "tiger",
+    "cnName": "初级变异",
+    "value": "tiger,#,5067,-1",
+    "type": "1"
+  },
+  "5068": {
+    "id": "5068",
+    "enName": "tiger",
+    "cnName": "高级变异",
+    "value": "tiger,#,5068,-1",
+    "type": "1"
+  },
+  "5100": {
+    "id": "5100",
+    "enName": "vehicle",
+    "cnName": "自行车（计时）",
+    "value": "vehicle,1,5100,#",
+    "type": "0"
+  },
+  "5101": {
+    "id": "5101",
+    "enName": "vehicle",
+    "cnName": "三轮车（计时）",
+    "value": "vehicle,1,5101,#",
+    "type": "0"
+  },
+  "5102": {
+    "id": "5102",
+    "enName": "vehicle",
+    "cnName": "电动车（计时）",
+    "value": "vehicle,1,5102,#",
+    "type": "0"
+  },
+  "5103": {
+    "id": "5103",
+    "enName": "vehicle",
+    "cnName": "摩托车（计时）",
+    "value": "vehicle,1,5103,#",
+    "type": "0"
+  },
+  "5200": {
+    "id": "5200",
+    "enName": "vehicle",
+    "cnName": "大众（计时）",
+    "value": "vehicle,1,5200,#",
+    "type": "0"
+  },
+  "5201": {
+    "id": "5201",
+    "enName": "vehicle",
+    "cnName": "宝马（计时）",
+    "value": "vehicle,1,5201,#",
+    "type": "0"
+  },
+  "5202": {
+    "id": "5202",
+    "enName": "vehicle",
+    "cnName": "奔驰（计时）",
+    "value": "vehicle,1,5202,#",
+    "type": "0"
+  },
+  "5300": {
+    "id": "5300",
+    "enName": "vehicle",
+    "cnName": "玛莎拉蒂（计时）",
+    "value": "vehicle,1,5300,#",
+    "type": "0"
+  },
+  "5301": {
+    "id": "5301",
+    "enName": "vehicle",
+    "cnName": "布加迪威龙（计时）",
+    "value": "vehicle,1,5301,#",
+    "type": "0"
+  },
+  "5302": {
+    "id": "5302",
+    "enName": "vehicle",
+    "cnName": "兰博基尼（计时）",
+    "value": "vehicle,1,5302,#",
+    "type": "0"
+  },
+  "6100": {
+    "id": "6100",
+    "enName": "nnframe",
+    "cnName": "金龙狂舞（牛牛头框）",
+    "value": "nnframe,1,6100,#",
+    "type": "0"
+  },
+  "6101": {
+    "id": "6101",
+    "enName": "nnframe",
+    "cnName": "擎天柱（牛牛头框）",
+    "value": "nnframe,1,6101,#",
+    "type": "0"
+  },
+  "6102": {
+    "id": "6102",
+    "enName": "nnframe",
+    "cnName": "天降财神（牛牛头框）",
+    "value": "nnframe,1,6102,#",
+    "type": "0"
+  },
+  "6103": {
+    "id": "6103",
+    "enName": "nnframe",
+    "cnName": "樱花之恋（牛牛头框）",
+    "value": "nnframe,1,6103,#",
+    "type": "0"
+  },
+  "6104": {
+    "id": "6104",
+    "enName": "nnframe",
+    "cnName": "贺新年（牛牛头框）",
+    "value": "nnframe,1,6104,#",
+    "type": "0"
+  },
+  "6105": {
+    "id": "6105",
+    "enName": "nnframe",
+    "cnName": "钻石之星（牛牛头框）",
+    "value": "nnframe,1,6105,#",
+    "type": "0"
+  },
+  "6106": {
+    "id": "6106",
+    "enName": "nnframe",
+    "cnName": "九五至尊（牛牛头框）",
+    "value": "nnframe,1,6106,#",
+    "type": "0"
+  },
+  "6200": {
+    "id": "6200",
+    "enName": "addUp",
+    "cnName": "捕鱼等级30级礼包",
+    "value": "addUp,#,6200,-1",
+    "type": "1"
+  },
+  "6201": {
+    "id": "6201",
+    "enName": "addUp",
+    "cnName": "捕鱼等级60级礼包",
+    "value": "addUp,#,6201,-1",
+    "type": "1"
+  },
+  "6202": {
+    "id": "6202",
+    "enName": "addUp",
+    "cnName": "捕鱼等级90级礼包",
+    "value": "addUp,#,6202,-1",
+    "type": "1"
+  },
+  "6203": {
+    "id": "6203",
+    "enName": "addUp",
+    "cnName": "捕鱼等级120级礼包",
+    "value": "addUp,#,6203,-1",
+    "type": "1"
+  },
+  "6204": {
+    "id": "6204",
+    "enName": "addUp",
+    "cnName": "捕鱼等级150级礼包",
+    "value": "addUp,#,6204,-1",
+    "type": "1"
+  },
+  "6205": {
+    "id": "6205",
+    "enName": "addUp",
+    "cnName": "捕鱼等级180级礼包",
+    "value": "addUp,#,6205,-1",
+    "type": "1"
+  },
+  "6206": {
+    "id": "6206",
+    "enName": "addUp",
+    "cnName": "捕鱼等级10级礼包",
+    "value": "addUp,#,6206,-1",
+    "type": "1"
+  },
+  "6207": {
+    "id": "6207",
+    "enName": "addUp",
+    "cnName": "捕鱼等级20级礼包",
+    "value": "addUp,#,6207,-1",
+    "type": "1"
+  },
+  "6208": {
+    "id": "6208",
+    "enName": "addUp",
+    "cnName": "捕鱼等级40级礼包",
+    "value": "addUp,#,6208,-1",
+    "type": "1"
+  },
+  "6209": {
+    "id": "6209",
+    "enName": "addUp",
+    "cnName": "捕鱼等级50级礼包",
+    "value": "addUp,#,6209,-1",
+    "type": "1"
+  },
+  "6210": {
+    "id": "6210",
+    "enName": "addUp",
+    "cnName": "捕鱼等级70级礼包",
+    "value": "addUp,#,6210,-1",
+    "type": "1"
+  },
+  "6211": {
+    "id": "6211",
+    "enName": "addUp",
+    "cnName": "捕鱼等级80级礼包",
+    "value": "addUp,#,6211,-1",
+    "type": "1"
+  },
+  "6212": {
+    "id": "6212",
+    "enName": "addUp",
+    "cnName": "捕鱼等级100级礼包",
+    "value": "addUp,#,6212,-1",
+    "type": "1"
+  },
+  "6213": {
+    "id": "6213",
+    "enName": "addUp",
+    "cnName": "捕鱼等级110级礼包",
+    "value": "addUp,#,6213,-1",
+    "type": "1"
+  },
+  "6214": {
+    "id": "6214",
+    "enName": "addUp",
+    "cnName": "捕鱼等级130级礼包",
+    "value": "addUp,#,6214,-1",
+    "type": "1"
+  },
+  "6215": {
+    "id": "6215",
+    "enName": "addUp",
+    "cnName": "捕鱼等级140级礼包",
+    "value": "addUp,#,6215,-1",
+    "type": "1"
+  },
+  "6216": {
+    "id": "6216",
+    "enName": "addUp",
+    "cnName": "捕鱼等级160级礼包",
+    "value": "addUp,#,6216,-1",
+    "type": "1"
+  },
+  "6217": {
+    "id": "6217",
+    "enName": "addUp",
+    "cnName": "捕鱼等级170级礼包",
+    "value": "addUp,#,6217,-1",
+    "type": "1"
+  },
+  "6251": {
+    "id": "6251",
+    "enName": "addUp",
+    "cnName": "青铜弹",
+    "value": "addUp,#,6251,-1",
+    "type": "1"
+  },
+  "6252": {
+    "id": "6252",
+    "enName": "addUp",
+    "cnName": "白银弹",
+    "value": "addUp,#,6252,-1",
+    "type": "1"
+  },
+  "6499": {
+    "id": "6499",
+    "enName": "addUp",
+    "cnName": "炮台碎片",
+    "value": "addUp,#,6499,-1",
+    "type": "1"
+  },
+  "6500": {
+    "id": "6500",
+    "enName": "addUp",
+    "cnName": "新刮刮卡",
+    "value": "addUp,#,6500,-1",
+    "type": "1"
+  },
+  "6501": {
+    "id": "6501",
+    "enName": "addUp",
+    "cnName": "随机导弹礼包",
+    "value": "addUp,#,6501,-1",
+    "type": "1"
+  },
+  "6502": {
+    "id": "6502",
+    "enName": "addUp",
+    "cnName": "随机福袋礼包",
+    "value": "addUp,#,6502,-1",
+    "type": "1"
+  },
+  "6601": {
+    "id": "6601",
+    "enName": "addUp",
+    "cnName": "初来乍到",
+    "value": "addUp,#,6601,-1",
+    "type": "1"
+  },
+  "6602": {
+    "id": "6602",
+    "enName": "addUp",
+    "cnName": "崭露头角",
+    "value": "addUp,#,6602,-1",
+    "type": "1"
+  },
+  "6603": {
+    "id": "6603",
+    "enName": "addUp",
+    "cnName": "鱼跃龙门",
+    "value": "addUp,#,6603,-1",
+    "type": "1"
+  },
+  "6604": {
+    "id": "6604",
+    "enName": "addUp",
+    "cnName": "荣华富贵",
+    "value": "addUp,#,6604,-1",
+    "type": "1"
+  },
+  "6605": {
+    "id": "6605",
+    "enName": "addUp",
+    "cnName": "富甲一方",
+    "value": "addUp,#,6605,-1",
+    "type": "1"
+  },
+  "6606": {
+    "id": "6606",
+    "enName": "addUp",
+    "cnName": "追云逐月",
+    "value": "addUp,#,6606,-1",
+    "type": "1"
+  },
+  "6607": {
+    "id": "6607",
+    "enName": "addUp",
+    "cnName": "楚楚留香",
+    "value": "addUp,#,6607,-1",
+    "type": "1"
+  },
+  "6608": {
+    "id": "6608",
+    "enName": "addUp",
+    "cnName": "福如东海",
+    "value": "addUp,#,6608,-1",
+    "type": "1"
+  },
+  "6609": {
+    "id": "6609",
+    "enName": "addUp",
+    "cnName": "欢度国庆",
+    "value": "addUp,#,6609,-1",
+    "type": "1"
+  },
+  "6610": {
+    "id": "6610",
+    "enName": "addUp",
+    "cnName": "一生所爱",
+    "value": "addUp,#,6610,-1",
+    "type": "1"
+  },
+  "6611": {
+    "id": "6611",
+    "enName": "addUp",
+    "cnName": "龙腾天下",
+    "value": "addUp,#,6611,-1",
+    "type": "1"
+  },
+  "6612": {
+    "id": "6612",
+    "enName": "addUp",
+    "cnName": "莺声燕语",
+    "value": "addUp,#,6612,-1",
+    "type": "1"
+  },
+  "6613": {
+    "id": "6613",
+    "enName": "addUp",
+    "cnName": "百炼成钢",
+    "value": "addUp,#,6613,-1",
+    "type": "1"
+  },
+  "6614": {
+    "id": "6614",
+    "enName": "addUp",
+    "cnName": "金龙狂舞(新头像框)",
+    "value": "addUp,1,6614,#",
+    "type": "0"
+  },
+  "6615": {
+    "id": "6615",
+    "enName": "addUp",
+    "cnName": "擎天柱(新头像框)",
+    "value": "addUp,1,6615,#",
+    "type": "0"
+  },
+  "6616": {
+    "id": "6616",
+    "enName": "addUp",
+    "cnName": "天降财神(新头像框)",
+    "value": "addUp,1,6616,#",
+    "type": "0"
+  },
+  "6617": {
+    "id": "6617",
+    "enName": "addUp",
+    "cnName": "樱花之恋(新头像框)",
+    "value": "addUp,1,6617,#",
+    "type": "0"
+  },
+  "6618": {
+    "id": "6618",
+    "enName": "addUp",
+    "cnName": "贺新年(新头像框)",
+    "value": "addUp,1,6618,#",
+    "type": "0"
+  },
+  "6619": {
+    "id": "6619",
+    "enName": "addUp",
+    "cnName": "钻石之星(新头像框)",
+    "value": "addUp,1,6619,#",
+    "type": "0"
+  },
+  "6620": {
+    "id": "6620",
+    "enName": "addUp",
+    "cnName": "九五至尊(新头像框)",
+    "value": "addUp,1,6620,#",
+    "type": "0"
+  },
+  "6621": {
+    "id": "6621",
+    "enName": "addUp",
+    "cnName": "头像框",
+    "value": "addUp,1,6621,#",
+    "type": "0"
+  },
+  "6622": {
+    "id": "6622",
+    "enName": "addUp",
+    "cnName": "王者荣耀(新头像框)",
+    "value": "addUp,1,6622,#",
+    "type": "0"
+  },
+  "6623": {
+    "id": "6623",
+    "enName": "addUp",
+    "cnName": "海洋之心(新头像框)",
+    "value": "addUp,1,6623,#",
+    "type": "0"
+  },
+  "6624": {
+    "id": "6624",
+    "enName": "addUp",
+    "cnName": "猪光宝气(新头像框)",
+    "value": "addUp,1,6624,#",
+    "type": "0"
+  },
+  "6625": {
+    "id": "6625",
+    "enName": "addUp",
+    "cnName": "万家灯火(新头像框)",
+    "value": "addUp,1,6625,#",
+    "type": "0"
+  },
+  "6626": {
+    "id": "6626",
+    "enName": "addUp",
+    "cnName": "释厄西游(新头像框)",
+    "value": "addUp,1,6626,#",
+    "type": "0"
+  },
+  "6627": {
+    "id": "6627",
+    "enName": "addUp",
+    "cnName": "神烦狗(新头像框)",
+    "value": "addUp,1,6627,#",
+    "type": "0"
+  },
+  "6628": {
+    "id": "6628",
+    "enName": "addUp",
+    "cnName": "无拘白羊",
+    "value": "addUp,1,6628,#",
+    "type": "0"
+  },
+  "6629": {
+    "id": "6629",
+    "enName": "addUp",
+    "cnName": "亲和巨蟹",
+    "value": "addUp,1,6629,#",
+    "type": "0"
+  },
+  "6630": {
+    "id": "6630",
+    "enName": "addUp",
+    "cnName": "一心射手",
+    "value": "addUp,1,6630,#",
+    "type": "0"
+  },
+  "6631": {
+    "id": "6631",
+    "enName": "addUp",
+    "cnName": "执着狮子",
+    "value": "addUp,1,6631,#",
+    "type": "0"
+  },
+  "6632": {
+    "id": "6632",
+    "enName": "addUp",
+    "cnName": "感性摩羯",
+    "value": "addUp,1,6632,#",
+    "type": "0"
+  },
+  "6633": {
+    "id": "6633",
+    "enName": "addUp",
+    "cnName": "周年庆头像框",
+    "value": "addUp,1,6633,#",
+    "type": "0"
+  },
+  "6634": {
+    "id": "6634",
+    "enName": "addUp",
+    "cnName": "国庆头像框",
+    "value": "addUp,1,6634,#",
+    "type": "0"
+  },
+  "6635": {
+    "id": "6635",
+    "enName": "addUp",
+    "cnName": "中秋头像框",
+    "value": "addUp,1,6635,#",
+    "type": "0"
+  },
+  "7000": {
+    "id": "7000",
+    "enName": "cimelia",
+    "cnName": "七星剑",
+    "value": "cimelia,#,7000,-1",
+    "type": "1"
+  },
+  "7001": {
+    "id": "7001",
+    "enName": "cimelia",
+    "cnName": "虎符",
+    "value": "cimelia,#,7001,-1",
+    "type": "1"
+  },
+  "7002": {
+    "id": "7002",
+    "enName": "cimelia",
+    "cnName": "赤兔马",
+    "value": "cimelia,#,7002,-1",
+    "type": "1"
+  },
+  "7003": {
+    "id": "7003",
+    "enName": "cimelia",
+    "cnName": "方天画戟",
+    "value": "cimelia,#,7003,-1",
+    "type": "1"
+  },
+  "7004": {
+    "id": "7004",
+    "enName": "cimelia",
+    "cnName": "八卦阵石",
+    "value": "cimelia,#,7004,-1",
+    "type": "1"
+  },
+  "7005": {
+    "id": "7005",
+    "enName": "cimelia",
+    "cnName": "白玉羽扇",
+    "value": "cimelia,#,7005,-1",
+    "type": "1"
+  },
+  "7100": {
+    "id": "7100",
+    "enName": "cimeliaChip",
+    "cnName": "七星剑·碎片",
+    "value": "cimeliaChip,#,7100,-1",
+    "type": "1"
+  },
+  "7101": {
+    "id": "7101",
+    "enName": "cimeliaChip",
+    "cnName": "虎符·碎片",
+    "value": "cimeliaChip,#,7101,-1",
+    "type": "1"
+  },
+  "7102": {
+    "id": "7102",
+    "enName": "cimeliaChip",
+    "cnName": "赤兔马·碎片",
+    "value": "cimeliaChip,#,7102,-1",
+    "type": "1"
+  },
+  "7103": {
+    "id": "7103",
+    "enName": "cimeliaChip",
+    "cnName": "方天画戟·碎片",
+    "value": "cimeliaChip,#,7103,-1",
+    "type": "1"
+  },
+  "7104": {
+    "id": "7104",
+    "enName": "cimeliaChip",
+    "cnName": "八卦阵石·碎片",
+    "value": "cimeliaChip,#,7104,-1",
+    "type": "1"
+  },
+  "7105": {
+    "id": "7105",
+    "enName": "cimeliaChip",
+    "cnName": "白玉羽扇·碎片",
+    "value": "cimeliaChip,#,7105,-1",
+    "type": "1"
+  },
+  "7201": {
+    "id": "7201",
+    "enName": "addUp",
+    "cnName": "金币抽奖卡",
+    "value": "addUp,#,7201,-1",
+    "type": "1"
+  },
+  "7202": {
+    "id": "7202",
+    "enName": "addUp",
+    "cnName": "钻石抽奖卡",
+    "value": "addUp,#,7202,-1",
+    "type": "1"
+  },
+  "7203": {
+    "id": "7203",
+    "enName": "addUp",
+    "cnName": "加速卡",
+    "value": "addUp,#,7203,-1",
+    "type": "1"
+  },
+  "7401": {
+    "id": "7401",
+    "enName": "addUp",
+    "cnName": "指南积分",
+    "value": "addUp,#,7401,-1",
+    "type": "1"
+  },
+  "7402": {
+    "id": "7402",
+    "enName": "addUp",
+    "cnName": "* 福字",
+    "value": "addUp,#,7402,-1",
+    "type": "1"
+  },
+  "7403": {
+    "id": "7403",
+    "enName": "addUp",
+    "cnName": "* 禄字",
+    "value": "addUp,#,7403,-1",
+    "type": "1"
+  },
+  "7404": {
+    "id": "7404",
+    "enName": "addUp",
+    "cnName": "* 寿字",
+    "value": "addUp,#,7404,-1",
+    "type": "1"
+  },
+  "7405": {
+    "id": "7405",
+    "enName": "addUp",
+    "cnName": "* 喜字",
+    "value": "addUp,#,7405,-1",
+    "type": "1"
+  },
+  "7406": {
+    "id": "7406",
+    "enName": "addUp",
+    "cnName": "指南标志1",
+    "value": "addUp,#,7406,-1",
+    "type": "1"
+  },
+  "7407": {
+    "id": "7407",
+    "enName": "addUp",
+    "cnName": "指南标志2",
+    "value": "addUp,#,7407,-1",
+    "type": "1"
+  },
+  "7408": {
+    "id": "7408",
+    "enName": "addUp",
+    "cnName": "指南标志3",
+    "value": "addUp,#,7408,-1",
+    "type": "1"
+  },
+  "7409": {
+    "id": "7409",
+    "enName": "addUp",
+    "cnName": "指南标志4",
+    "value": "addUp,#,7409,-1",
+    "type": "1"
+  },
+  "7410": {
+    "id": "7410",
+    "enName": "addUp",
+    "cnName": "指南标志5",
+    "value": "addUp,#,7410,-1",
+    "type": "1"
+  },
+  "7411": {
+    "id": "7411",
+    "enName": "addUp",
+    "cnName": "指南标志6",
+    "value": "addUp,#,7411,-1",
+    "type": "1"
+  },
+  "7412": {
+    "id": "7412",
+    "enName": "addUp",
+    "cnName": "指南标志7",
+    "value": "addUp,#,7412,-1",
+    "type": "1"
+  },
+  "7413": {
+    "id": "7413",
+    "enName": "addUp",
+    "cnName": "指南标志8",
+    "value": "addUp,#,7413,-1",
+    "type": "1"
+  },
+  "7414": {
+    "id": "7414",
+    "enName": "addUp",
+    "cnName": "指南标志9",
+    "value": "addUp,#,7414,-1",
+    "type": "1"
+  },
+  "7415": {
+    "id": "7415",
+    "enName": "addUp",
+    "cnName": "指南标志10",
+    "value": "addUp,#,7415,-1",
+    "type": "1"
+  },
+  "7416": {
+    "id": "7416",
+    "enName": "addUp",
+    "cnName": "指南标志11",
+    "value": "addUp,#,7416,-1",
+    "type": "1"
+  },
+  "7417": {
+    "id": "7417",
+    "enName": "addUp",
+    "cnName": "指南标志12",
+    "value": "addUp,#,7417,-1",
+    "type": "1"
+  },
+  "7418": {
+    "id": "7418",
+    "enName": "addUp",
+    "cnName": "指南标志13",
+    "value": "addUp,#,7418,-1",
+    "type": "1"
+  },
+  "7419": {
+    "id": "7419",
+    "enName": "addUp",
+    "cnName": "指南标志14",
+    "value": "addUp,#,7419,-1",
+    "type": "1"
+  },
+  "7420": {
+    "id": "7420",
+    "enName": "addUp",
+    "cnName": "指南表情:委屈",
+    "value": "addUp,#,7420,-1",
+    "type": "1"
+  },
+  "7421": {
+    "id": "7421",
+    "enName": "addUp",
+    "cnName": "指南表情:发呆",
+    "value": "addUp,#,7421,-1",
+    "type": "1"
+  },
+  "7422": {
+    "id": "7422",
+    "enName": "addUp",
+    "cnName": "指南表情:皱眉",
+    "value": "addUp,#,7422,-1",
+    "type": "1"
+  },
+  "7423": {
+    "id": "7423",
+    "enName": "addUp",
+    "cnName": "指南表情:尴尬",
+    "value": "addUp,#,7423,-1",
+    "type": "1"
+  },
+  "7424": {
+    "id": "7424",
+    "enName": "addUp",
+    "cnName": "指南表情:痴迷",
+    "value": "addUp,#,7424,-1",
+    "type": "1"
+  },
+  "7425": {
+    "id": "7425",
+    "enName": "addUp",
+    "cnName": "指南表情:坏笑",
+    "value": "addUp,#,7425,-1",
+    "type": "1"
+  },
+  "7426": {
+    "id": "7426",
+    "enName": "addUp",
+    "cnName": "指南表情:呕吐",
+    "value": "addUp,#,7426,-1",
+    "type": "1"
+  },
+  "7427": {
+    "id": "7427",
+    "enName": "addUp",
+    "cnName": "指南表情:大哭",
+    "value": "addUp,#,7427,-1",
+    "type": "1"
+  },
+  "7428": {
+    "id": "7428",
+    "enName": "addUp",
+    "cnName": "指南表情:怒火",
+    "value": "addUp,#,7428,-1",
+    "type": "1"
+  },
+  "7429": {
+    "id": "7429",
+    "enName": "addUp",
+    "cnName": "指南表情:帅气",
+    "value": "addUp,#,7429,-1",
+    "type": "1"
+  },
+  "7440": {
+    "id": "7440",
+    "enName": "addUp",
+    "cnName": "藏宝图1",
+    "value": "addUp,#,7440,-1",
+    "type": "1"
+  },
+  "7441": {
+    "id": "7441",
+    "enName": "addUp",
+    "cnName": "藏宝图2",
+    "value": "addUp,#,7441,-1",
+    "type": "1"
+  },
+  "7442": {
+    "id": "7442",
+    "enName": "addUp",
+    "cnName": "藏宝图3",
+    "value": "addUp,#,7442,-1",
+    "type": "1"
+  },
+  "7443": {
+    "id": "7443",
+    "enName": "addUp",
+    "cnName": "藏宝图4",
+    "value": "addUp,#,7443,-1",
+    "type": "1"
+  },
+  "7444": {
+    "id": "7444",
+    "enName": "addUp",
+    "cnName": "藏宝图5",
+    "value": "addUp,#,7444,-1",
+    "type": "1"
+  },
+  "7445": {
+    "id": "7445",
+    "enName": "addUp",
+    "cnName": "指南宝箱",
+    "value": "addUp,#,7445,-1",
+    "type": "1"
+  },
+  "7446": {
+    "id": "7446",
+    "enName": "addUp",
+    "cnName": "指南大转盘",
+    "value": "addUp,#,7446,-1",
+    "type": "1"
+  },
+  "7447": {
+    "id": "7447",
+    "enName": "addUp",
+    "cnName": "开启指南界面",
+    "value": "addUp,#,7447,-1",
+    "type": "1"
+  },
+  "7448": {
+    "id": "7448",
+    "enName": "addUp",
+    "cnName": "夏季珍藏一",
+    "value": "addUp,#,7448,-1",
+    "type": "1"
+  },
+  "7449": {
+    "id": "7449",
+    "enName": "addUp",
+    "cnName": "夏季珍藏二",
+    "value": "addUp,#,7449,-1",
+    "type": "1"
+  },
+  "7450": {
+    "id": "7450",
+    "enName": "addUp",
+    "cnName": "夏季珍藏三",
+    "value": "addUp,#,7450,-1",
+    "type": "1"
+  },
+  "7451": {
+    "id": "7451",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天1",
+    "value": "addUp,#,7451,-1",
+    "type": "1"
+  },
+  "7452": {
+    "id": "7452",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天2",
+    "value": "addUp,#,7452,-1",
+    "type": "1"
+  },
+  "7453": {
+    "id": "7453",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天3",
+    "value": "addUp,#,7453,-1",
+    "type": "1"
+  },
+  "7454": {
+    "id": "7454",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天4",
+    "value": "addUp,#,7454,-1",
+    "type": "1"
+  },
+  "7455": {
+    "id": "7455",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天5",
+    "value": "addUp,#,7455,-1",
+    "type": "1"
+  },
+  "7456": {
+    "id": "7456",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天6",
+    "value": "addUp,#,7456,-1",
+    "type": "1"
+  },
+  "7457": {
+    "id": "7457",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天7",
+    "value": "addUp,#,7457,-1",
+    "type": "1"
+  },
+  "7458": {
+    "id": "7458",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天8",
+    "value": "addUp,#,7458,-1",
+    "type": "1"
+  },
+  "7459": {
+    "id": "7459",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天9",
+    "value": "addUp,#,7459,-1",
+    "type": "1"
+  },
+  "7460": {
+    "id": "7460",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天10",
+    "value": "addUp,#,7460,-1",
+    "type": "1"
+  },
+  "7461": {
+    "id": "7461",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天11",
+    "value": "addUp,#,7461,-1",
+    "type": "1"
+  },
+  "7462": {
+    "id": "7462",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天12",
+    "value": "addUp,#,7462,-1",
+    "type": "1"
+  },
+  "7463": {
+    "id": "7463",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天13",
+    "value": "addUp,#,7463,-1",
+    "type": "1"
+  },
+  "7464": {
+    "id": "7464",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天14",
+    "value": "addUp,#,7464,-1",
+    "type": "1"
+  },
+  "7465": {
+    "id": "7465",
+    "enName": "addUp",
+    "cnName": "夏季指南聊天15",
+    "value": "addUp,#,7465,-1",
+    "type": "1"
+  },
+  "7467": {
+    "id": "7467",
+    "enName": "addUp",
+    "cnName": "夏季小灵气袋",
+    "value": "addUp,#,7467,-1",
+    "type": "1"
+  },
+  "7468": {
+    "id": "7468",
+    "enName": "addUp",
+    "cnName": "夏季大灵气袋",
+    "value": "addUp,#,7468,-1",
+    "type": "1"
+  },
+  "7469": {
+    "id": "7469",
+    "enName": "addUp",
+    "cnName": "夏季灵气宝玉",
+    "value": "addUp,#,7469,-1",
+    "type": "1"
+  },
+  "7470": {
+    "id": "7470",
+    "enName": "addUp",
+    "cnName": "夏季灵气神魄",
+    "value": "addUp,#,7470,-1",
+    "type": "1"
+  },
+  "7506": {
+    "id": "7506",
+    "enName": "addUp",
+    "cnName": "弹幕框（计时）",
+    "value": "addUp,1,7506,-1",
+    "type": "1"
+  },
+  "7507": {
+    "id": "7507",
+    "enName": "addUp",
+    "cnName": "夏季指南弹幕框",
+    "value": "addUp,#,7507,-1",
+    "type": "1"
+  },
+  "7660": {
+    "id": "7660",
+    "enName": "addUp",
+    "cnName": "夏季指南表情1",
+    "value": "addUp,#,7660,-1",
+    "type": "1"
+  },
+  "7661": {
+    "id": "7661",
+    "enName": "addUp",
+    "cnName": "夏季指南表情2",
+    "value": "addUp,#,7661,-1",
+    "type": "1"
+  },
+  "7662": {
+    "id": "7662",
+    "enName": "addUp",
+    "cnName": "夏季指南表情3",
+    "value": "addUp,#,7662,-1",
+    "type": "1"
+  },
+  "7663": {
+    "id": "7663",
+    "enName": "addUp",
+    "cnName": "夏季指南表情4",
+    "value": "addUp,#,7663,-1",
+    "type": "1"
+  },
+  "7664": {
+    "id": "7664",
+    "enName": "addUp",
+    "cnName": "夏季指南表情5",
+    "value": "addUp,#,7664,-1",
+    "type": "1"
+  },
+  "7665": {
+    "id": "7665",
+    "enName": "addUp",
+    "cnName": "夏季指南表情6",
+    "value": "addUp,#,7665,-1",
+    "type": "1"
+  },
+  "7666": {
+    "id": "7666",
+    "enName": "addUp",
+    "cnName": "夏季指南表情7",
+    "value": "addUp,#,7666,-1",
+    "type": "1"
+  },
+  "7667": {
+    "id": "7667",
+    "enName": "addUp",
+    "cnName": "夏季指南表情8",
+    "value": "addUp,#,7667,-1",
+    "type": "1"
+  },
+  "7668": {
+    "id": "7668",
+    "enName": "addUp",
+    "cnName": "夏季指南表情9",
+    "value": "addUp,#,7668,-1",
+    "type": "1"
+  },
+  "7669": {
+    "id": "7669",
+    "enName": "addUp",
+    "cnName": "夏季指南表情10",
+    "value": "addUp,#,7669,-1",
+    "type": "1"
+  },
+  "7670": {
+    "id": "7670",
+    "enName": "addUp",
+    "cnName": "夏季指南表情11",
+    "value": "addUp,#,7670,-1",
+    "type": "1"
+  },
+  "7671": {
+    "id": "7671",
+    "enName": "addUp",
+    "cnName": "夏季指南表情12",
+    "value": "addUp,#,7671,-1",
+    "type": "1"
+  },
+  "7672": {
+    "id": "7672",
+    "enName": "addUp",
+    "cnName": "夏季指南表情13",
+    "value": "addUp,#,7672,-1",
+    "type": "1"
+  },
+  "7673": {
+    "id": "7673",
+    "enName": "addUp",
+    "cnName": "夏季指南表情14",
+    "value": "addUp,#,7673,-1",
+    "type": "1"
+  },
+  "7674": {
+    "id": "7674",
+    "enName": "addUp",
+    "cnName": "夏季指南表情15",
+    "value": "addUp,#,7674,-1",
+    "type": "1"
+  },
+  "7675": {
+    "id": "7675",
+    "enName": "addUp",
+    "cnName": "夏季指南表情16",
+    "value": "addUp,#,7675,-1",
+    "type": "1"
+  },
+  "7676": {
+    "id": "7676",
+    "enName": "addUp",
+    "cnName": "夏季指南表情17",
+    "value": "addUp,#,7676,-1",
+    "type": "1"
+  },
+  "7677": {
+    "id": "7677",
+    "enName": "addUp",
+    "cnName": "夏季指南表情18",
+    "value": "addUp,#,7677,-1",
+    "type": "1"
+  },
+  "7678": {
+    "id": "7678",
+    "enName": "addUp",
+    "cnName": "夏季指南表情19",
+    "value": "addUp,#,7678,-1",
+    "type": "1"
+  },
+  "7679": {
+    "id": "7679",
+    "enName": "addUp",
+    "cnName": "夏季指南表情20",
+    "value": "addUp,#,7679,-1",
+    "type": "1"
+  },
+  "7707": {
+    "id": "7707",
+    "enName": "addUp",
+    "cnName": "炫彩ID（计时）",
+    "value": "addUp,1,7707,#",
+    "type": "0"
+  },
+  "7708": {
+    "id": "7708",
+    "enName": "addUp",
+    "cnName": "盛夏指南炫彩id",
+    "value": "addUp,#,7708,-1",
+    "type": "1"
+  },
+  "7709": {
+    "id": "7709",
+    "enName": "addUp",
+    "cnName": "夏季指南弹幕框",
+    "value": "addUp,1,7709,#",
+    "type": "0"
+  },
+  "7801": {
+    "id": "7801",
+    "enName": "addUp",
+    "cnName": "新春掉落道具1",
+    "value": "addUp,#,7801,-1",
+    "type": "1"
+  },
+  "7802": {
+    "id": "7802",
+    "enName": "addUp",
+    "cnName": "新春掉落道具2",
+    "value": "addUp,#,7802,-1",
+    "type": "1"
+  },
+  "7803": {
+    "id": "7803",
+    "enName": "addUp",
+    "cnName": "新春掉落道具3",
+    "value": "addUp,#,7803,-1",
+    "type": "1"
+  },
+  "7804": {
+    "id": "7804",
+    "enName": "addUp",
+    "cnName": "鞭炮",
+    "value": "addUp,#,7804,-1",
+    "type": "1"
+  },
+  "7805": {
+    "id": "7805",
+    "enName": "addUp",
+    "cnName": "爆竹",
+    "value": "addUp,#,7805,-1",
+    "type": "1"
+  },
+  "7806": {
+    "id": "7806",
+    "enName": "addUp",
+    "cnName": "鸡蛋",
+    "value": "addUp,#,7806,-1",
+    "type": "1"
+  },
+  "7807": {
+    "id": "7807",
+    "enName": "addUp",
+    "cnName": "赞",
+    "value": "addUp,#,7807,-1",
+    "type": "1"
+  },
+  "7808": {
+    "id": "7808",
+    "enName": "addUp",
+    "cnName": "花",
+    "value": "addUp,#,7808,-1",
+    "type": "1"
+  },
+  "7809": {
+    "id": "7809",
+    "enName": "addUp",
+    "cnName": "666",
+    "value": "addUp,#,7809,-1",
+    "type": "1"
+  },
+  "7810": {
+    "id": "7810",
+    "enName": "addUp",
+    "cnName": "砖头",
+    "value": "addUp,#,7810,-1",
+    "type": "1"
+  },
+  "7900": {
+    "id": "7900",
+    "enName": "addUp",
+    "cnName": "强袭战翼",
+    "value": "addUp,1,7900,#,LV*",
+    "type": "2"
+  },
+  "7901": {
+    "id": "7901",
+    "enName": "addUp",
+    "cnName": "花灵蝶梦",
+    "value": "addUp,1,7901,#,LV*",
+    "type": "2"
+  },
+  "7902": {
+    "id": "7902",
+    "enName": "addUp",
+    "cnName": "创世圣羽",
+    "value": "addUp,1,7902,#,LV*",
+    "type": "2"
+  },
+  "7903": {
+    "id": "7903",
+    "enName": "addUp",
+    "cnName": "苍穹领主",
+    "value": "addUp,1,7903,#,LV*",
+    "type": "2"
+  },
+  "7904": {
+    "id": "7904",
+    "enName": "addUp",
+    "cnName": "月陨晶羽",
+    "value": "addUp,1,7904,#,LV*",
+    "type": "2"
+  },
+  "7905": {
+    "id": "7905",
+    "enName": "addUp",
+    "cnName": "恶魔之翼",
+    "value": "addUp,1,7905,#,LV*",
+    "type": "2"
+  },
+  "7906": {
+    "id": "7906",
+    "enName": "addUp",
+    "cnName": "舞剑仙·麒麟",
+    "value": "addUp,1,7906,#,LV*",
+    "type": "2"
+  },
+  "7950": {
+    "id": "7950",
+    "enName": "addUp",
+    "cnName": "G合金",
+    "value": "addUp,#,7950",
+    "type": "1"
+  },
+  "7951": {
+    "id": "7951",
+    "enName": "addUp",
+    "cnName": "能源晶石",
+    "value": "addUp,#,7951",
+    "type": "1"
+  },
+  "7952": {
+    "id": "7952",
+    "enName": "addUp",
+    "cnName": "天蓝石",
+    "value": "addUp,#,7952",
+    "type": "1"
+  },
+  "7953": {
+    "id": "7953",
+    "enName": "addUp",
+    "cnName": "I粒子放射器",
+    "value": "addUp,#,7953",
+    "type": "1"
+  },
+  "7954": {
+    "id": "7954",
+    "enName": "addUp",
+    "cnName": "圣依米的茎",
+    "value": "addUp,#,7954",
+    "type": "1"
+  },
+  "7955": {
+    "id": "7955",
+    "enName": "addUp",
+    "cnName": "灵蔷薇的花瓣",
+    "value": "addUp,#,7955",
+    "type": "1"
+  },
+  "7956": {
+    "id": "7956",
+    "enName": "addUp",
+    "cnName": "梦舞蝶的薄翼",
+    "value": "addUp,#,7956",
+    "type": "1"
+  },
+  "7957": {
+    "id": "7957",
+    "enName": "addUp",
+    "cnName": "妖精本源",
+    "value": "addUp,#,7957",
+    "type": "1"
+  },
+  "7958": {
+    "id": "7958",
+    "enName": "addUp",
+    "cnName": "卡麦尔之骨",
+    "value": "addUp,#,7958",
+    "type": "1"
+  },
+  "7959": {
+    "id": "7959",
+    "enName": "addUp",
+    "cnName": "拉斐尔之泪",
+    "value": "addUp,#,7959",
+    "type": "1"
+  },
+  "7960": {
+    "id": "7960",
+    "enName": "addUp",
+    "cnName": "加百列之羽",
+    "value": "addUp,#,7960",
+    "type": "1"
+  },
+  "7961": {
+    "id": "7961",
+    "enName": "addUp",
+    "cnName": "米迦勒之羽",
+    "value": "addUp,#,7961",
+    "type": "1"
+  },
+  "7962": {
+    "id": "7962",
+    "enName": "addUp",
+    "cnName": "承天晶",
+    "value": "addUp,#,7962",
+    "type": "1"
+  },
+  "7963": {
+    "id": "7963",
+    "enName": "addUp",
+    "cnName": "狮鹫王之羽",
+    "value": "addUp,#,7963",
+    "type": "1"
+  },
+  "7964": {
+    "id": "7964",
+    "enName": "addUp",
+    "cnName": "落霞之光",
+    "value": "addUp,#,7964",
+    "type": "1"
+  },
+  "7965": {
+    "id": "7965",
+    "enName": "addUp",
+    "cnName": "骄阳之核",
+    "value": "addUp,#,7965",
+    "type": "1"
+  },
+  "7966": {
+    "id": "7966",
+    "enName": "addUp",
+    "cnName": "不融冰",
+    "value": "addUp,#,7966",
+    "type": "1"
+  },
+  "7967": {
+    "id": "7967",
+    "enName": "addUp",
+    "cnName": "紫气之羽",
+    "value": "addUp,#,7967",
+    "type": "1"
+  },
+  "7968": {
+    "id": "7968",
+    "enName": "addUp",
+    "cnName": "落霞鸟之绒",
+    "value": "addUp,#,7968",
+    "type": "1"
+  },
+  "7969": {
+    "id": "7969",
+    "enName": "addUp",
+    "cnName": "月神仙气",
+    "value": "addUp,#,7969",
+    "type": "1"
+  },
+  "7970": {
+    "id": "7970",
+    "enName": "addUp",
+    "cnName": "亚伯之骨",
+    "value": "addUp,#,7970",
+    "type": "1"
+  },
+  "7971": {
+    "id": "7971",
+    "enName": "addUp",
+    "cnName": "卡蜜拉之翼",
+    "value": "addUp,#,7971",
+    "type": "1"
+  },
+  "7972": {
+    "id": "7972",
+    "enName": "addUp",
+    "cnName": "该隐魂珠",
+    "value": "addUp,#,7972",
+    "type": "1"
+  },
+  "7973": {
+    "id": "7973",
+    "enName": "addUp",
+    "cnName": "德古拉之力",
+    "value": "addUp,#,7973",
+    "type": "1"
+  },
+  "7974": {
+    "id": "7974",
+    "enName": "addUp",
+    "cnName": "麒麟剑·柄",
+    "value": "addUp,#,7974",
+    "type": "1"
+  },
+  "7975": {
+    "id": "7975",
+    "enName": "addUp",
+    "cnName": "麒麟剑·格",
+    "value": "addUp,#,7975",
+    "type": "1"
+  },
+  "7976": {
+    "id": "7976",
+    "enName": "addUp",
+    "cnName": "麒麟剑·身",
+    "value": "addUp,#,7976",
+    "type": "1"
+  },
+  "7977": {
+    "id": "7977",
+    "enName": "addUp",
+    "cnName": "麒麟之血",
+    "value": "addUp,#,7977",
+    "type": "1"
+  },
+  "9000": {
+    "id": "9000",
+    "enName": "addUp",
+    "cnName": "愚人节活动-刀子",
+    "value": "addUp,#,9000,-1",
+    "type": "1"
+  },
+  "9001": {
+    "id": "9001",
+    "enName": "addUp",
+    "cnName": "愚人节活动-叉子",
+    "value": "addUp,#,9001,-1",
+    "type": "1"
+  },
+  "9002": {
+    "id": "9002",
+    "enName": "addUp",
+    "cnName": "愚人节活动-盘子",
+    "value": "addUp,#,9002,-1",
+    "type": "1"
+  },
+  "9003": {
+    "id": "9003",
+    "enName": "addUp",
+    "cnName": "愚人节活动-赶猪棒",
+    "value": "addUp,#,9003,-1",
+    "type": "1"
+  },
+  "9004": {
+    "id": "9004",
+    "enName": "addUp",
+    "cnName": "铁锤",
+    "value": "addUp,#,9004,-1",
+    "type": "1"
+  },
+  "9005": {
+    "id": "9005",
+    "enName": "addUp",
+    "cnName": "金捶 ",
+    "value": "addUp,#,9005,-1",
+    "type": "1"
+  },
+  "9006": {
+    "id": "9006",
+    "enName": "addUp",
+    "cnName": "宝藏碎片",
+    "value": "addUp,#,9006,-1",
+    "type": "1"
+  },
+  "9007": {
+    "id": "9007",
+    "enName": "addUp",
+    "cnName": "头像碎片",
+    "value": "addUp,#,9007,-1",
+    "type": "1"
+  },
+  "9008": {
+    "id": "9008",
+    "enName": "addUp",
+    "cnName": "节日活动-饭票/粮票",
+    "value": "addUp,#,9008,-1",
+    "type": "1"
+  },
+  "9009": {
+    "id": "9009",
+    "enName": "addUp",
+    "cnName": "节日活动-粽叶",
+    "value": "addUp,#,9009,-1",
+    "type": "1"
+  },
+  "9010": {
+    "id": "9010",
+    "enName": "addUp",
+    "cnName": "节日活动-糯米",
+    "value": "addUp,#,9010,-1",
+    "type": "1"
+  },
+  "9011": {
+    "id": "9011",
+    "enName": "addUp",
+    "cnName": "节日活动-红枣",
+    "value": "addUp,#,9011,-1",
+    "type": "1"
+  },
+  "9012": {
+    "id": "9012",
+    "enName": "addUp",
+    "cnName": "节日活动-蛋黄",
+    "value": "addUp,#,9012,-1",
+    "type": "1"
+  },
+  "9013": {
+    "id": "9013",
+    "enName": "addUp",
+    "cnName": "节日活动-五花肉 ",
+    "value": "addUp,#,9013,-1",
+    "type": "1"
+  },
+  "9014": {
+    "id": "9014",
+    "enName": "addUp",
+    "cnName": "节日活动-桂花 ",
+    "value": "addUp,#,9014,-1",
+    "type": "1"
+  },
+  "9020": {
+    "id": "9020",
+    "enName": "addUp",
+    "cnName": "节日活动-巧果",
+    "value": "addUp,#,9020,-1",
+    "type": "1"
+  },
+  "9021": {
+    "id": "9021",
+    "enName": "addUp",
+    "cnName": "节日活动-祝福值",
+    "value": "addUp,#,9021,-1",
+    "type": "1"
+  },
+  "9054": {
+    "id": "9054",
+    "enName": "addUp",
+    "cnName": "周活动-积分竞赛积分",
+    "value": "addUp,#,9054,-1",
+    "type": "1"
+  },
+  "9101": {
+    "id": "9101",
+    "enName": "addUp",
+    "cnName": "100炮台优惠券（计时）",
+    "value": "addUp,1,9101,#",
+    "type": "0"
+  },
+  "9102": {
+    "id": "9102",
+    "enName": "addUp",
+    "cnName": "200炮台优惠券（计时）",
+    "value": "addUp,1,9102,#",
+    "type": "0"
+  },
+  "9103": {
+    "id": "9103",
+    "enName": "addUp",
+    "cnName": "500炮台优惠券（计时）",
+    "value": "addUp,1,9103,#",
+    "type": "0"
+  },
+  "9201": {
+    "id": "9201",
+    "enName": "addUp",
+    "cnName": "捕鱼自动开炮（计时）",
+    "value": "addUp,1,9201,#",
+    "type": "0"
+  },
+  "9301": {
+    "id": "9301",
+    "enName": "addUp",
+    "cnName": "大奖赛邀请函",
+    "value": "addUp,#,9301,-1",
+    "type": "1"
+  },
+  "9401": {
+    "id": "9401",
+    "enName": "addUp",
+    "cnName": "淘金积分",
+    "value": "addUp,#,9401,-1",
+    "type": "1"
+  },
+  "9500": {
+    "id": "9500",
+    "enName": "addUp",
+    "cnName": "该隐",
+    "value": "addUp,#,9500,-1",
+    "type": "1"
+  },
+  "9501": {
+    "id": "9501",
+    "enName": "addUp",
+    "cnName": "卡米拉",
+    "value": "addUp,#,9501,-1",
+    "type": "1"
+  },
+  "9502": {
+    "id": "9502",
+    "enName": "addUp",
+    "cnName": "魔术小美",
+    "value": "addUp,#,9502,-1",
+    "type": "1"
+  },
+  "9503": {
+    "id": "9503",
+    "enName": "addUp",
+    "cnName": "圣诞小美",
+    "value": "addUp,#,9503,-1",
+    "type": "1"
+  },
+  "9504": {
+    "id": "9504",
+    "enName": "addUp",
+    "cnName": "音速小美",
+    "value": "addUp,#,9504,-1",
+    "type": "1"
+  },
+  "9505": {
+    "id": "9505",
+    "enName": "addUp",
+    "cnName": "杂技小美",
+    "value": "addUp,#,9505,-1",
+    "type": "1"
+  },
+  "9506": {
+    "id": "9506",
+    "enName": "addUp",
+    "cnName": "娇妻小美",
+    "value": "addUp,#,9506,-1",
+    "type": "1"
+  },
+  "9507": {
+    "id": "9507",
+    "enName": "addUp",
+    "cnName": "青龙",
+    "value": "addUp,#,9507,-1",
+    "type": "1"
+  },
+  "9508": {
+    "id": "9508",
+    "enName": "addUp",
+    "cnName": "朱雀",
+    "value": "addUp,#,9508,-1",
+    "type": "1"
+  },
+  "9509": {
+    "id": "9509",
+    "enName": "addUp",
+    "cnName": "白虎",
+    "value": "addUp,#,9509,-1",
+    "type": "1"
+  },
+  "9510": {
+    "id": "9510",
+    "enName": "addUp",
+    "cnName": "玄武",
+    "value": "addUp,#,9510,-1",
+    "type": "1"
+  },
+  "9511": {
+    "id": "9511",
+    "enName": "addUp",
+    "cnName": "明珠",
+    "value": "addUp,#,9511,-1",
+    "type": "1"
+  },
+  "9512": {
+    "id": "9512",
+    "enName": "addUp",
+    "cnName": "杰克",
+    "value": "addUp,#,9512,-1",
+    "type": "1"
+  },
+  "9513": {
+    "id": "9513",
+    "enName": "addUp",
+    "cnName": "罗莎莉",
+    "value": "addUp,#,9513,-1",
+    "type": "1"
+  },
+  "9514": {
+    "id": "9514",
+    "enName": "addUp",
+    "cnName": "奈萨里尔",
+    "value": "addUp,#,9514,-1",
+    "type": "1"
+  },
+  "9515": {
+    "id": "9515",
+    "enName": "addUp",
+    "cnName": "孔明",
+    "value": "addUp,#,9515,-1",
+    "type": "1"
+  },
+  "9516": {
+    "id": "9516",
+    "enName": "addUp",
+    "cnName": "萧让",
+    "value": "addUp,#,9516,-1",
+    "type": "1"
+  },
+  "9517": {
+    "id": "9517",
+    "enName": "addUp",
+    "cnName": "吴用",
+    "value": "addUp,#,9517,-1",
+    "type": "1"
+  },
+  "9518": {
+    "id": "9518",
+    "enName": "addUp",
+    "cnName": "宋江",
+    "value": "addUp,#,9518,-1",
+    "type": "1"
+  },
+  "9519": {
+    "id": "9519",
+    "enName": "addUp",
+    "cnName": "鲁智深",
+    "value": "addUp,#,9519,-1",
+    "type": "1"
+  },
+  "9520": {
+    "id": "9520",
+    "enName": "addUp",
+    "cnName": "童子哪吒",
+    "value": "addUp,#,9520,-1",
+    "type": "1"
+  },
+  "9521": {
+    "id": "9521",
+    "enName": "addUp",
+    "cnName": "少年二郎",
+    "value": "addUp,#,9521,-1",
+    "type": "1"
+  },
+  "9522": {
+    "id": "9522",
+    "enName": "addUp",
+    "cnName": "小悟空",
+    "value": "addUp,#,9522,-1",
+    "type": "1"
+  },
+  "9523": {
+    "id": "9523",
+    "enName": "addUp",
+    "cnName": "诸葛亮",
+    "value": "addUp,#,9523,-1",
+    "type": "1"
+  },
+  "9524": {
+    "id": "9524",
+    "enName": "addUp",
+    "cnName": "关羽",
+    "value": "addUp,#,9524,-1",
+    "type": "1"
+  },
+  "9525": {
+    "id": "9525",
+    "enName": "addUp",
+    "cnName": "张飞",
+    "value": "addUp,#,9525,-1",
+    "type": "1"
+  },
+  "9526": {
+    "id": "9526",
+    "enName": "addUp",
+    "cnName": "周瑜",
+    "value": "addUp,#,9526,-1",
+    "type": "1"
+  },
+  "9527": {
+    "id": "9527",
+    "enName": "addUp",
+    "cnName": "刘备",
+    "value": "addUp,#,9527,-1",
+    "type": "1"
+  },
+  "9528": {
+    "id": "9528",
+    "enName": "addUp",
+    "cnName": "赵云",
+    "value": "addUp,#,9528,-1",
+    "type": "1"
+  },
+  "9529": {
+    "id": "9529",
+    "enName": "addUp",
+    "cnName": "貂蝉",
+    "value": "addUp,#,9529,-1",
+    "type": "1"
+  },
+  "9530": {
+    "id": "9530",
+    "enName": "addUp",
+    "cnName": "吕布",
+    "value": "addUp,#,9530,-1",
+    "type": "1"
+  },
+  "9549": {
+    "id": "9549",
+    "enName": "addUp",
+    "cnName": "万能牌",
+    "value": "addUp,#,9549,-1",
+    "type": "1"
+  },
+  "9550": {
+    "id": "9550",
+    "enName": "addUp",
+    "cnName": "少年该隐(纯金)",
+    "value": "addUp,#,9550,-1",
+    "type": "1"
+  },
+  "9551": {
+    "id": "9551",
+    "enName": "addUp",
+    "cnName": "卡米拉(纯金)",
+    "value": "addUp,#,9551,-1",
+    "type": "1"
+  },
+  "9552": {
+    "id": "9552",
+    "enName": "addUp",
+    "cnName": "魔术小美(纯金)",
+    "value": "addUp,#,9552,-1",
+    "type": "1"
+  },
+  "9553": {
+    "id": "9553",
+    "enName": "addUp",
+    "cnName": "圣诞小美(纯金)",
+    "value": "addUp,#,9553,-1",
+    "type": "1"
+  },
+  "9554": {
+    "id": "9554",
+    "enName": "addUp",
+    "cnName": "音速小美(纯金)",
+    "value": "addUp,#,9554,-1",
+    "type": "1"
+  },
+  "9555": {
+    "id": "9555",
+    "enName": "addUp",
+    "cnName": "杂技小美(纯金)",
+    "value": "addUp,#,9555,-1",
+    "type": "1"
+  },
+  "9556": {
+    "id": "9556",
+    "enName": "addUp",
+    "cnName": "娇妻小美(纯金)",
+    "value": "addUp,#,9556,-1",
+    "type": "1"
+  },
+  "9557": {
+    "id": "9557",
+    "enName": "addUp",
+    "cnName": "青龙(纯金)",
+    "value": "addUp,#,9557,-1",
+    "type": "1"
+  },
+  "9558": {
+    "id": "9558",
+    "enName": "addUp",
+    "cnName": "朱雀(纯金)",
+    "value": "addUp,#,9558,-1",
+    "type": "1"
+  },
+  "9559": {
+    "id": "9559",
+    "enName": "addUp",
+    "cnName": "白虎(纯金)",
+    "value": "addUp,#,9559,-1",
+    "type": "1"
+  },
+  "9560": {
+    "id": "9560",
+    "enName": "addUp",
+    "cnName": "玄武(纯金)",
+    "value": "addUp,#,9560,-1",
+    "type": "1"
+  },
+  "9561": {
+    "id": "9561",
+    "enName": "addUp",
+    "cnName": "明珠(纯金)",
+    "value": "addUp,#,9561,-1",
+    "type": "1"
+  },
+  "9562": {
+    "id": "9562",
+    "enName": "addUp",
+    "cnName": "杰克(纯金)",
+    "value": "addUp,#,9562,-1",
+    "type": "1"
+  },
+  "9563": {
+    "id": "9563",
+    "enName": "addUp",
+    "cnName": "罗丽莎(纯金)",
+    "value": "addUp,#,9563,-1",
+    "type": "1"
+  },
+  "9564": {
+    "id": "9564",
+    "enName": "addUp",
+    "cnName": "奈萨里尔(纯金)",
+    "value": "addUp,#,9564,-1",
+    "type": "1"
+  },
+  "9565": {
+    "id": "9565",
+    "enName": "addUp",
+    "cnName": "孔明(纯金)",
+    "value": "addUp,#,9565,-1",
+    "type": "1"
+  },
+  "9566": {
+    "id": "9566",
+    "enName": "addUp",
+    "cnName": "萧让(纯金)",
+    "value": "addUp,#,9566,-1",
+    "type": "1"
+  },
+  "9567": {
+    "id": "9567",
+    "enName": "addUp",
+    "cnName": "吴用(纯金)",
+    "value": "addUp,#,9567,-1",
+    "type": "1"
+  },
+  "9568": {
+    "id": "9568",
+    "enName": "addUp",
+    "cnName": "宋江(纯金)",
+    "value": "addUp,#,9568,-1",
+    "type": "1"
+  },
+  "9569": {
+    "id": "9569",
+    "enName": "addUp",
+    "cnName": "鲁智深(纯金)",
+    "value": "addUp,#,9569,-1",
+    "type": "1"
+  },
+  "9570": {
+    "id": "9570",
+    "enName": "addUp",
+    "cnName": "童子哪吒(纯金)",
+    "value": "addUp,#,9570,-1",
+    "type": "1"
+  },
+  "9571": {
+    "id": "9571",
+    "enName": "addUp",
+    "cnName": "少年二郎(纯金)",
+    "value": "addUp,#,9571,-1",
+    "type": "1"
+  },
+  "9572": {
+    "id": "9572",
+    "enName": "addUp",
+    "cnName": "小悟空(纯金)",
+    "value": "addUp,#,9572,-1",
+    "type": "1"
+  },
+  "9573": {
+    "id": "9573",
+    "enName": "addUp",
+    "cnName": "神诸葛亮(纯金)",
+    "value": "addUp,#,9573,-1",
+    "type": "1"
+  },
+  "9574": {
+    "id": "9574",
+    "enName": "addUp",
+    "cnName": "武圣云长(纯金)",
+    "value": "addUp,#,9574,-1",
+    "type": "1"
+  },
+  "9575": {
+    "id": "9575",
+    "enName": "addUp",
+    "cnName": "神张飞(纯金)",
+    "value": "addUp,#,9575,-1",
+    "type": "1"
+  },
+  "9576": {
+    "id": "9576",
+    "enName": "addUp",
+    "cnName": "神周瑜(纯金)",
+    "value": "addUp,#,9576,-1",
+    "type": "1"
+  },
+  "9577": {
+    "id": "9577",
+    "enName": "addUp",
+    "cnName": "天刘备(纯金)",
+    "value": "addUp,#,9577,-1",
+    "type": "1"
+  },
+  "9578": {
+    "id": "9578",
+    "enName": "addUp",
+    "cnName": "神赵云(纯金)",
+    "value": "addUp,#,9578,-1",
+    "type": "1"
+  },
+  "9579": {
+    "id": "9579",
+    "enName": "addUp",
+    "cnName": "仙貂蝉(纯金)",
+    "value": "addUp,#,9579,-1",
+    "type": "1"
+  },
+  "9580": {
+    "id": "9580",
+    "enName": "addUp",
+    "cnName": "魔吕布(纯金)",
+    "value": "addUp,#,9580,-1",
+    "type": "1"
+  },
+  "9600": {
+    "id": "9600",
+    "enName": "addUp",
+    "cnName": "夏季卡牌培养材料干粮",
+    "value": "addUp,#,9600,-1",
+    "type": "1"
+  },
+  "9601": {
+    "id": "9601",
+    "enName": "addUp",
+    "cnName": "夏季卡牌培养材料书",
+    "value": "addUp,#,9601,-1",
+    "type": "1"
+  },
+  "9602": {
+    "id": "9602",
+    "enName": "addUp",
+    "cnName": "夏季卡牌培养材料武器",
+    "value": "addUp,#,9602,-1",
+    "type": "1"
+  },
+  "9603": {
+    "id": "9603",
+    "enName": "addUp",
+    "cnName": "夏季卡牌培养材料护甲",
+    "value": "addUp,#,9603,-1",
+    "type": "1"
+  },
+  "9660": {
+    "id": "9660",
+    "enName": "addUp",
+    "cnName": "夏季指南表情1",
+    "value": "addUp,#,9660,-1",
+    "type": "1"
+  },
+  "9661": {
+    "id": "9661",
+    "enName": "addUp",
+    "cnName": "夏季指南表情2",
+    "value": "addUp,#,9661,-1",
+    "type": "1"
+  },
+  "9662": {
+    "id": "9662",
+    "enName": "addUp",
+    "cnName": "夏季指南表情3",
+    "value": "addUp,#,9662,-1",
+    "type": "1"
+  },
+  "9663": {
+    "id": "9663",
+    "enName": "addUp",
+    "cnName": "夏季指南表情4",
+    "value": "addUp,#,9663,-1",
+    "type": "1"
+  },
+  "9664": {
+    "id": "9664",
+    "enName": "addUp",
+    "cnName": "夏季指南表情5",
+    "value": "addUp,#,9664,-1",
+    "type": "1"
+  },
+  "9665": {
+    "id": "9665",
+    "enName": "addUp",
+    "cnName": "夏季指南表情6",
+    "value": "addUp,#,9665,-1",
+    "type": "1"
+  },
+  "9666": {
+    "id": "9666",
+    "enName": "addUp",
+    "cnName": "夏季指南表情7",
+    "value": "addUp,#,9666,-1",
+    "type": "1"
+  },
+  "9667": {
+    "id": "9667",
+    "enName": "addUp",
+    "cnName": "夏季指南表情8",
+    "value": "addUp,#,9667,-1",
+    "type": "1"
+  },
+  "9668": {
+    "id": "9668",
+    "enName": "addUp",
+    "cnName": "夏季指南表情9",
+    "value": "addUp,#,9668,-1",
+    "type": "1"
+  },
+  "9669": {
+    "id": "9669",
+    "enName": "addUp",
+    "cnName": "夏季指南表情10",
+    "value": "addUp,#,9669,-1",
+    "type": "1"
+  },
+  "9670": {
+    "id": "9670",
+    "enName": "addUp",
+    "cnName": "夏季指南表情11",
+    "value": "addUp,#,9670,-1",
+    "type": "1"
+  },
+  "9671": {
+    "id": "9671",
+    "enName": "addUp",
+    "cnName": "夏季指南表情12",
+    "value": "addUp,#,9671,-1",
+    "type": "1"
+  },
+  "9672": {
+    "id": "9672",
+    "enName": "addUp",
+    "cnName": "夏季指南表情13",
+    "value": "addUp,#,9672,-1",
+    "type": "1"
+  },
+  "9673": {
+    "id": "9673",
+    "enName": "addUp",
+    "cnName": "夏季指南表情14",
+    "value": "addUp,#,9673,-1",
+    "type": "1"
+  },
+  "9674": {
+    "id": "9674",
+    "enName": "addUp",
+    "cnName": "夏季指南表情15",
+    "value": "addUp,#,9674,-1",
+    "type": "1"
+  },
+  "9675": {
+    "id": "9675",
+    "enName": "addUp",
+    "cnName": "夏季指南表情16",
+    "value": "addUp,#,9675,-1",
+    "type": "1"
+  },
+  "9676": {
+    "id": "9676",
+    "enName": "addUp",
+    "cnName": "夏季指南表情17",
+    "value": "addUp,#,9676,-1",
+    "type": "1"
+  },
+  "9677": {
+    "id": "9677",
+    "enName": "addUp",
+    "cnName": "夏季指南表情18",
+    "value": "addUp,#,9677,-1",
+    "type": "1"
+  },
+  "9678": {
+    "id": "9678",
+    "enName": "addUp",
+    "cnName": "夏季指南表情19",
+    "value": "addUp,#,9678,-1",
+    "type": "1"
+  },
+  "9679": {
+    "id": "9679",
+    "enName": "addUp",
+    "cnName": "夏季指南表情20",
+    "value": "addUp,#,9679,-1",
+    "type": "1"
+  },
+  "9701": {
+    "id": "9701",
+    "enName": "addUp",
+    "cnName": "夏季星辰宝石",
+    "value": "addUp,#,9701,-1",
+    "type": "1"
+  },
+  "9702": {
+    "id": "9702",
+    "enName": "addUp",
+    "cnName": "夏季普通宝箱",
+    "value": "addUp,#,9702,-1",
+    "type": "1"
+  },
+  "9703": {
+    "id": "9703",
+    "enName": "addUp",
+    "cnName": "夏季白银宝箱",
+    "value": "addUp,#,9703,-1",
+    "type": "1"
+  },
+  "9704": {
+    "id": "9704",
+    "enName": "addUp",
+    "cnName": "夏季黄金宝箱",
+    "value": "addUp,#,9704,-1",
+    "type": "1"
+  },
+  "9705": {
+    "id": "9705",
+    "enName": "addUp",
+    "cnName": "夏季普通转盘",
+    "value": "addUp,#,9705,-1",
+    "type": "1"
+  },
+  "9706": {
+    "id": "9706",
+    "enName": "addUp",
+    "cnName": "夏季白银转盘",
+    "value": "addUp,#,9706,-1",
+    "type": "1"
+  },
+  "9707": {
+    "id": "9707",
+    "enName": "addUp",
+    "cnName": "夏季黄金转盘",
+    "value": "addUp,#,9707,-1",
+    "type": "1"
+  },
+  "9708": {
+    "id": "9708",
+    "enName": "addUp",
+    "cnName": "夏季普通奖章",
+    "value": "addUp,#,9708,-1",
+    "type": "1"
+  },
+  "9709": {
+    "id": "9709",
+    "enName": "addUp",
+    "cnName": "夏季白银奖章",
+    "value": "addUp,#,9709,-1",
+    "type": "1"
+  },
+  "9710": {
+    "id": "9710",
+    "enName": "addUp",
+    "cnName": "夏季黄金奖章",
+    "value": "addUp,#,9710,-1",
+    "type": "1"
+  },
+  "9711": {
+    "id": "9711",
+    "enName": "addUp",
+    "cnName": "夏季指南经验",
+    "value": "addUp,#,9711,-1",
+    "type": "1"
+  },
+  "9720": {
+    "id": "9720",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志1",
+    "value": "addUp,#,9720,-1",
+    "type": "1"
+  },
+  "9721": {
+    "id": "9721",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志2",
+    "value": "addUp,#,9721,-1",
+    "type": "1"
+  },
+  "9722": {
+    "id": "9722",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志3",
+    "value": "addUp,#,9722,-1",
+    "type": "1"
+  },
+  "9723": {
+    "id": "9723",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志4",
+    "value": "addUp,#,9723,-1",
+    "type": "1"
+  },
+  "9724": {
+    "id": "9724",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志5",
+    "value": "addUp,#,9724,-1",
+    "type": "1"
+  },
+  "9725": {
+    "id": "9725",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志6",
+    "value": "addUp,#,9725,-1",
+    "type": "1"
+  },
+  "9726": {
+    "id": "9726",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志7",
+    "value": "addUp,#,9726,-1",
+    "type": "1"
+  },
+  "9727": {
+    "id": "9727",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志8",
+    "value": "addUp,#,9727,-1",
+    "type": "1"
+  },
+  "9728": {
+    "id": "9728",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志9",
+    "value": "addUp,#,9728,-1",
+    "type": "1"
+  },
+  "9729": {
+    "id": "9729",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志10",
+    "value": "addUp,#,9729,-1",
+    "type": "1"
+  },
+  "9730": {
+    "id": "9730",
+    "enName": "addUp",
+    "cnName": "盛夏指南标志11",
+    "value": "addUp,#,9730,-1",
+    "type": "1"
+  },
+  "9731": {
+    "id": "9731",
+    "enName": "addUp",
+    "cnName": "盛夏指南宝藏钥匙",
+    "value": "addUp,#,9731,-1",
+    "type": "1"
+  },
+  "9732": {
+    "id": "9732",
+    "enName": "addUp",
+    "cnName": "盛夏指南随机卡牌",
+    "value": "addUp,#,9732,-1",
+    "type": "1"
+  },
+  "9712": {
+    "id": "9712",
+    "enName": "addUp",
+    "cnName": "纪念币",
+    "value": "addUp,#,9712,-1",
+    "type": "1"
+  }
+}
+//遍历对象
+let saveData = [];
+for (let i in data){
+	let item = data[i];
+	let str = '' + item.cnName;
+  var n = str.match(id);
+  if(n != null){
+    saveData.push(item);
+  }
+	if(id == data[i].id){
+    saveData.push(item);
+	}
+}
+let showStr= '';
+for(let data of saveData){
+  showStr = showStr + data.id + ':' + data.cnName + "\n";
+}
+if(showStr == ""){
+  showStr = '未找到相应字符串！！'
+}
+alert(showStr);
+}
+      </script>
+
+<div class="item1">
+<img src="icon.png" >
+</div>
+<div class="title">
+  <div class="item1">
+	<div style="font-size: 35px;font-weight: bold">GM后台</div>
+  </div>
+  </div>
+  <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+<!-- TODO 搜索功能年后完善 -->
+
+<!-- <div class="g-container" style="margin-top:-80px"> 
+    <form action="" class="basic-grey">
+        <div class="form-group">
+            <label for="lastname" class="control-label">
+            快速搜索:
+            </label>
+            <div class="Companies">
+                <input class="form-control" type="text" placeholder="输入关键字，确认后回车">
+                <input type="button" value="搜索" id = "input" onclick="btnval()">
+            </div>
+        </div>
+    </form>
+</div> 老预发布:http://118.31.73.124:8080/dfhmanage/jsp/main.jsp-->
+  <div class="item2">
+  <input  class="mybtn" type="button" value="测试服后台"  style="margin-top:20px;margin-left:83px" onclick="window.open('https://master.guoneitest.com/dfhmanage/')"
+  <div>
+      <input class="mybtn" type="button" value="预发布后台" style="margin-top:-70px;margin-left:50px" onclick="diag0()"
+  </div>
+  <input class="mybtn" type="button" value="正式服后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('https://mmgg.yuwan-game.com/')"
+  <div>
+      <input class="mybtn" type="button" value="打包管理后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('http://bpm.yuwan-game.com/#/login')"
+  </div> 
+  <input class="mybtn" type="button" value="H5后台(测试/正式服)" style="margin-top:-70px;margin-left:50px" onclick="H5()" 
+  <div>
+  <input class="mybtn" type="button" value="预发布账号生成" style="margin-top:40px;margin-left:83px" onclick="window.open('https://prerelease.guoneitest.com/p_acc/t_page/register.html')"
+  </div>
+  <input class="mybtn" type="button" value="测试服账号生成" style="margin-top:-70px;margin-left:50px" onclick="window.open('https://www.guoneitest.com/p_acc/t_page/register.html')"
+  <div>
+      <input class="mybtn" type="button" value="Wps文档后台" style="margin-top:-70px;margin-left:50px" onclick="window.open('https://drive.wps.cn/team/280280335')"
+  </div>
+  <input class="mybtn" type="button" value="confluence后台" style="margin-top:40px;margin-left:50px" onclick="window.open('http://192.168.1.128:8090/pages/viewpage.action?pageId=3085762')"
+  <div>
+    <input class="mybtn" type="button" value="禅道后台" style="margin-top:40px;margin-left:50px" onclick="window.open('http://172.16.12.245/zentao/')">
+  </div>
+  
+</div>
+  <div class="item2">
+      <input  class="mybtn" type="button" id="button" value="Vip等级(Master)" name="Su1" style="margin-top:40px;margin-left:83px" onclick="diag()">
+      <input  class="mybtn" type="button" value="Vip等级(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag1()">
+      <input  class="mybtn" type="button" value="Vip等级(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw4()">
+      <input  class="mybtn" type="button" value="增加金币(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag2()">
+      <input  class="mybtn" type="button" value="增加金币(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag3()">
+      <input  class="mybtn" type="button" value="增加金币(海外test)" name="Su1" style="margin-top:40px;margin-left:83px"onclick="hw()">
+      <input  class="mybtn" type="button" value="增加钻石(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag4()">
+      <input  class="mybtn" type="button" value="增加钻石(预发布)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag5()">
+      <input  class="mybtn" type="button" value="增加钻石(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw1()">
+      <input  class="mybtn" type="button" value="增加奖券(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag6()">
+      <input  class="mybtn" type="button" value="增加奖券(预发布)" name="Su1" style="margin-top:40px;margin-left:83px"onclick="diag7()">
+      <input  class="mybtn" type="button" value="增加奖券(海外test)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="hw2()">
+      <input  class="mybtn" type="button" value="所有炮台(Master)" name="Su1" style="margin-top:-80px;margin-left:50px"onclick="diag8()">
+      <input  class="mybtn" type="button" value="所有炮台(预发布)" name="Su1" style="margin-top:40px;margin-left:50px"onclick="diag9()">
+      <input  class="mybtn" type="button" value="所有炮台(海外test)" name="Su1" style="margin-top:40px;margin-left:50px"onclick="hw3()">
+      <input class="mybtn" type="button" value="BY_召唤(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY()">
+      <input class="mybtn" type="button" value="BY_召唤(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY1()">
+      <input class="mybtn" type="button" value="BY_狂暴(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY2()">
+      <input class="mybtn" type="button" value="BY_狂暴(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY3()">
+      <input class="mybtn" type="button" value="BY_核弹(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY4()">
+      <input class="mybtn" type="button" value="BY_核弹(预发布)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY5()">
+      <input class="mybtn" type="button" value="BY_冰冻(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY6()">
+      <input class="mybtn" type="button" value="BY_冰冻(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY7()">
+      <input class="mybtn" type="button" value="BY_锁定(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY8()">
+      <input class="mybtn" type="button" value="BY_锁定(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY9()">
+      <input class="mybtn" type="button" value="BY_青铜弹头(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY10()">
+      <input class="mybtn" type="button" value="BY_青铜弹头(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY11()">
+      <input class="mybtn" type="button" value="BY_白银弹头(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY12()">
+      <input class="mybtn" type="button" value="BY_白银弹头(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY13()">
+      <input class="mybtn" type="button" value="BY_所有翅膀(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="BY14()">
+      <input class="mybtn" type="button" value="BY_所有翅膀(预发布)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="BY15()">
+      <input class="mybtn" type="button" value="DT_小福袋(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT()">
+      <input class="mybtn" type="button" value="DT_小福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT1()">
+      <input class="mybtn" type="button" value="DT_银福袋(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT2()">
+      <input class="mybtn" type="button" value="DT_银福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT3()">
+      <input class="mybtn" type="button" value="DT_金福袋(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DT4()">
+      <input class="mybtn" type="button" value="DT_金福袋(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT5()">
+      <input class="mybtn" type="button" value="DT_购买商品(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT6()">
+      <input class="mybtn" type="button" value="DT_购买商品(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT7()">
+      <input class="mybtn" type="button" value="DT_购买月卡(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT8()">
+      <input class="mybtn" type="button" value="DT_购买月卡(预发布)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DT9()">
+      <input class="mybtn" type="button" value="DT_夺宝奇兵(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT10()">
+      <input class="mybtn" type="button" value="DT_夺宝奇兵(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT11()">
+      <input class="mybtn" type="button" value="DT_新春指南(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT12()">
+      <input class="mybtn" type="button" value="DT_新春指南(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DT13()">
+      <input class="mybtn" type="button" value="斗地主IP开关(Master)"name="Su1" style="margin-top:40px;margin-left:83px" onclick="DDZ()">
+      <input class="mybtn" type="button" value="斗地主IP开关(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="DDZ1()">
+      <input class="mybtn" type="button" value="水浒传pool(Master)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="jj()">
+      <input class="mybtn" type="button" value="水浒传pool(预发布)"name="Su1" style="margin-top:40px;margin-left:50px" onclick="jj1()">
+      <input class="mybtn" type="button" value="道具表查询"name="Su1" style="margin-top:40px;margin-left:50px" onclick="showjson()">
+	  <input class="mybtn" type="button" value="万能按钮(发道具)"name="Su1" style="margin-top:40px;margin-left:83px;color:red" onclick="item()">
+</div> 
+<div id="test">
+    Add Log:合并H5测试/正式服后台<br>
+    Add Log:增加万能道具btn<br>
+  <div style="color:red">Add Log:添加新版本翅膀/炮台id<br></div>
+  <div style="color:red">Add Log:点屏幕空白区域触发彩蛋<br></div>
+    Fix Log:道具查询由json改成读表<br>
+    Fix Log:优化万能按钮发道具问题<br>
+</div>    
+<div id="times"></div>
+
+</body>
+</html>
